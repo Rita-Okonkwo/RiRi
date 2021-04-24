@@ -1,0 +1,2 @@
+com/example/riri/shared/BuildConfig.java
+ com.example.riri.shared.BuildConfig

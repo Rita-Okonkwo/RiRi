@@ -1,0 +1,2 @@
+com/example/riri/androidApp/BuildConfig.java
+ com.example.riri.androidApp.BuildConfig
