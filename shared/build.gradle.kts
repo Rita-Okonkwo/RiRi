@@ -2,8 +2,10 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("com.android.library")
     id("kotlin-android-extensions")
+
 }
 
 group = "com.example.riri"
@@ -35,6 +37,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+                implementation("io.ktor:ktor-client-json:$ktorVersion")
             }
         }
         val commonTest by getting {
@@ -45,7 +48,6 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("com.google.android.material:material:1.3.0")
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
             }
         }
