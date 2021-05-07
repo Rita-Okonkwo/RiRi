@@ -10,7 +10,8 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.*
 
 class RiRiApi {
-    var operationLocationUrl : String? = ""
+    var operationLocationUrl: String? = ""
+    var imageUrl = ""
     private val httpClient = HttpClient {
         install(JsonFeature) {
             val json = kotlinx.serialization.json.Json { ignoreUnknownKeys = true }
@@ -18,7 +19,7 @@ class RiRiApi {
         }
     }
 
-    private suspend fun sendImage(url : String) : HttpResponse {
+    private suspend fun sendImage(url: String): HttpResponse {
         return httpClient.post(IMAGE_ENDPOINT) {
             headers {
                 append("Content-Type", CONTENT_TYPE)
@@ -28,10 +29,12 @@ class RiRiApi {
         }
     }
 
-    suspend fun getResponse() : Image {
+    suspend fun getResponse(): Image {
         if (operationLocationUrl == "") {
             kotlin.runCatching {
-                sendImage("https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Atomist_quote_from_Democritus.png/338px-Atomist_quote_from_Democritus.png")
+                // sendImage("https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Atomist_quote_from_Democritus.png/338px-Atomist_quote_from_Democritus.png")
+                print(imageUrl)
+                sendImage(imageUrl)
             }.onSuccess {
                 operationLocationUrl = it.headers.get("Operation-Location")
                 println(operationLocationUrl)
@@ -54,7 +57,8 @@ class RiRiApi {
     }
 
     companion object {
-        private const val IMAGE_ENDPOINT = "https://ririvision.cognitiveservices.azure.com/vision/v3.1/read/analyze/"
+        private const val IMAGE_ENDPOINT =
+            "https://ririvision.cognitiveservices.azure.com/vision/v3.1/read/analyze/"
         private const val CONTENT_TYPE = "application/json"
         private const val OCP_APIM = "80d2b8c43b52442fad01d26a99e63ce7"
     }
