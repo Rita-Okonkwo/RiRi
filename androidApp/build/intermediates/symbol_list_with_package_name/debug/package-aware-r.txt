@@ -1864,6 +1864,7 @@ id chip1
 id chip2
 id chip3
 id chip_group
+id choose
 id chronometer
 id circle_center
 id clear_text
@@ -2177,6 +2178,7 @@ id unchecked
 id uniform
 id unlabeled
 id up
+id upload
 id uploadImageFragment
 id useLogo
 id view_offset_helper
