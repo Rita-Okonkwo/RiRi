@@ -35,6 +35,24 @@
     <string name="character_counter_content_description">%2$d ರಲ್ಲಿ %1$d ಅಕ್ಷರಗಳನ್ನು ನಮೂದಿಸಲಾಗಿದೆ</string>
     <string name="character_counter_overflowed_content_description">ಅಕ್ಷರ ಮಿತಿಯು %2$d ರಲ್ಲಿ %1$d ಮೀರಿದೆ</string>
     <string name="clear_text_end_icon_content_description">ಪಠ್ಯ ತೆರವುಗೊಳಿಸಿ</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"ಸಕ್ರಿಯಗೊಳಿಸು"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"Google Play ಸೇವೆಗಳನ್ನು ನೀವು ಸಕ್ರಿಯಗೊಳಿಸದ ಹೊರತು <ns1:g id="APP_NAME">%1$s</ns1:g> ಕಾರ್ಯನಿರ್ವಹಿಸುವುದಿಲ್ಲ."</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Google Play ಸೇವೆಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"ನಿಮ್ಮ ಸಾಧನದಿಂದ ಕಾಣೆಯಾಗಿರುವ <ns1:g id="APP_NAME">%1$s</ns1:g>, Google Play ಸೇವೆಗಳಿಲ್ಲದೆ ರನ್ ಆಗುವುದಿಲ್ಲ."</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Google Play ಸೇವೆಗಳನ್ನು ಪಡೆಯಿರಿ"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Google Play ಸೇವೆಗಳ ಲಭ್ಯತೆ"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Google Play ಸೇವೆಗಳ ದೋಷ"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"Google Play ಸೇವೆಗಳಲ್ಲಿ <ns1:g id="APP_NAME">%1$s</ns1:g> ಸಮಸ್ಯೆಯನ್ನು ಹೊಂದಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"ನಿಮ್ಮ ಸಾಧನದ ಮೂಲಕ ಬೆಂಬಲಿಸದಿರುವ Google Play ಸೇವೆಗಳಿಲ್ಲದೆ <ns1:g id="APP_NAME">%1$s</ns1:g> ರನ್‌ ಆಗುವುದಿಲ್ಲ."</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"ಅಪ್‌ಡೇಟ್‌ ಮಾಡು"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"ನೀವು Google Play ಸೇವೆಗಳನ್ನು ನವೀಕರಿಸದ ಹೊರತು <ns1:g id="APP_NAME">%1$s</ns1:g> ರನ್ ಆಗುವುದಿಲ್ಲ."</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Google ಪ್ಲೇ ಸೇವೆಗಳನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡಿ"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"Google Play ಸೇವೆಗಳಿಲ್ಲದೆ ಪ್ರಸ್ತುತ ಅಪ್‌ಡೇಟ್ ಆಗುತ್ತಿರುವ <ns1:g id="APP_NAME">%1$s</ns1:g> ರನ್ ಆಗುವುದಿಲ್ಲ."</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"Google Play ಸೇವೆಗಳ ಹೊಸ ಆವೃತ್ತಿ ಅಗತ್ಯವಿದೆ. ಸದ್ಯದಲ್ಲೇ ಅದು ತಾನಾಗಿಯೇ ಅಪ್‌ಡೇಟ್ ಆಗುತ್ತದೆ."</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"ಫೋನ್‌ನಲ್ಲಿ ತೆರೆಯಿರಿ"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"ಸೈನ್ ಇನ್"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Google ಮೂಲಕ ಸೈನ್ ಇನ್ ಮಾಡಿ"</string>
     <string name="error_icon_content_description">ದೋಷ</string>
     <string name="exposed_dropdown_menu_content_description">ಡ್ರಾಪ್‌ಡೌನ್ ಮೆನು ತೋರಿಸಿ</string>
     <string name="icon_content_description">ಡೈಲಾಗ್ ಐಕಾನ್</string>
@@ -84,6 +102,8 @@
     <string name="mtrl_picker_toggle_to_day_selection">ದಿನವನ್ನು ಆಯ್ಕೆಗಾಗಿ ಬದಲಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ</string>
     <string name="mtrl_picker_toggle_to_text_input_mode">ಪಠ್ಯ ಇನ್‌ಪುಟ್ ಮೋಡ್‌ಗೆ ಬದಲಿಸಿ</string>
     <string name="mtrl_picker_toggle_to_year_selection">ವರ್ಷವನ್ನು ಆಯ್ಕೆಗಾಗಿ ಬದಲಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"ಮೇಲಕ್ಕೆ ನ್ಯಾವಿಗೇಟ್ ಮಾಡಿ"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"ನ್ಯಾವಿಗೇಶನ್ ಡ್ರಾವರ್ ಅನ್ನು ತೆರೆಯಿರಿ"</string>
     <string name="password_toggle_content_description">ಪಾಸ್‌ವರ್ಡ್ ತೋರಿಸಿ</string>
     <string msgid="6264217191555673260" name="search_menu_title">"ಹುಡುಕಿ"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>

@@ -1,4 +1,5 @@
 buildscript {
+    val kotlin_version by extra("1.4.32")
     repositories {
         gradlePluginPortal()
         jcenter()
@@ -10,6 +11,7 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10")
         classpath("com.android.tools.build:gradle:4.1.3")
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
+        classpath("com.google.gms:google-services:4.3.5")
     }
 }
 

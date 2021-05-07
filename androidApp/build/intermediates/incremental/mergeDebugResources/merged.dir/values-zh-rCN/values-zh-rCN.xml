@@ -35,6 +35,24 @@
     <string name="character_counter_content_description">输入了 %1$d 个字符（上限为 %2$d 个）</string>
     <string name="character_counter_overflowed_content_description">超出字符数限制（共 %1$d 个，上限为 %2$d 个）</string>
     <string name="clear_text_end_icon_content_description">清除文字</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"启用"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"您必须先启用 Google Play 服务，然后才能运行<ns1:g id="APP_NAME">%1$s</ns1:g>。"</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"启用 Google Play 服务"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"安装"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"您的设备没有安装 Google Play 服务，因此无法运行<ns1:g id="APP_NAME">%1$s</ns1:g>。"</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"获取 Google Play 服务"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Google Play 服务的适用范围"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Google Play服务出错"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"<ns1:g id="APP_NAME">%1$s</ns1:g>无法访问 Google Play 服务，请重试。"</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"您的设备不支持 Google Play 服务，因此无法运行<ns1:g id="APP_NAME">%1$s</ns1:g>。"</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"更新"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"您必须先更新 Google Play 服务，然后才能运行<ns1:g id="APP_NAME">%1$s</ns1:g>。"</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"更新 Google Play 服务"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"Google Play 服务当前正在更新，因此您无法运行<ns1:g id="APP_NAME">%1$s</ns1:g>。"</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"必须使用新版 Google Play 服务。该服务很快就会自行更新。"</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"在手机上打开"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"登录"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"使用 Google 帐号登录"</string>
     <string name="error_icon_content_description">错误</string>
     <string name="exposed_dropdown_menu_content_description">显示下拉菜单</string>
     <string name="icon_content_description">对话框图标</string>
@@ -84,6 +102,8 @@
     <string name="mtrl_picker_toggle_to_day_selection">点按即可切换到选择某天</string>
     <string name="mtrl_picker_toggle_to_text_input_mode">切换到文本字段输入模式</string>
     <string name="mtrl_picker_toggle_to_year_selection">点按即可切换到选择某年</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"转到上一层级"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"打开抽屉式导航栏"</string>
     <string name="password_toggle_content_description">显示密码</string>
     <string msgid="6264217191555673260" name="search_menu_title">"搜索"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>

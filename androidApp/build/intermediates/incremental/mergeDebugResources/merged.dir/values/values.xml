@@ -73,7 +73,9 @@
         <enum name="rectangles" value="5"/>
     </attr>
     <attr format="reference" name="drawerArrowStyle"/>
+    <attr format="reference" name="drawerLayoutStyle"/>
     <attr format="integer" name="duration"/>
+    <attr format="dimension" name="elevation"/>
     <attr format="color" name="elevationOverlayColor"/>
     <attr format="boolean" name="elevationOverlayEnabled"/>
     <attr format="boolean" name="ensureMinTouchTargetSize"/>
@@ -416,6 +418,14 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
+    <color name="common_google_signin_btn_text_dark_default">@android:color/white</color>
+    <color name="common_google_signin_btn_text_dark_disabled">#1F000000</color>
+    <color name="common_google_signin_btn_text_dark_focused">@android:color/black</color>
+    <color name="common_google_signin_btn_text_dark_pressed">@android:color/white</color>
+    <color name="common_google_signin_btn_text_light_default">#90000000</color>
+    <color name="common_google_signin_btn_text_light_disabled">#1F000000</color>
+    <color name="common_google_signin_btn_text_light_focused">#90000000</color>
+    <color name="common_google_signin_btn_text_light_pressed">#DE000000</color>
     <color name="design_bottom_navigation_shadow_color">#14000000</color>
     <color name="design_dark_default_color_background">#121212</color>
     <color name="design_dark_default_color_error">#CF6679</color>
@@ -483,6 +493,7 @@
     <color name="mtrl_textinput_hovered_box_stroke_color">#DE000000</color>
     <color name="notification_action_color_filter">#ffffffff</color>
     <color name="notification_icon_bg_color">#ff9e9e9e</color>
+    <color name="notification_material_background_media_default_color">#ff424242</color>
     <color name="primary_dark_material_dark">@android:color/black</color>
     <color name="primary_dark_material_light">@color/material_grey_600</color>
     <color name="primary_material_dark">@color/material_grey_900</color>
@@ -594,6 +605,7 @@
     <dimen name="compat_control_corner_material">2dp</dimen>
     <dimen name="compat_notification_large_icon_max_height">320dp</dimen>
     <dimen name="compat_notification_large_icon_max_width">320dp</dimen>
+    <dimen name="def_drawer_elevation">10dp</dimen>
     <dimen name="default_dimension">100dp</dimen>
     <dimen name="design_appbar_elevation">4dp</dimen>
     <dimen name="design_bottom_navigation_active_item_max_width">168dp</dimen>
@@ -884,6 +896,10 @@
     <dimen name="notification_subtext_size">13sp</dimen>
     <dimen name="notification_top_pad">10dp</dimen>
     <dimen name="notification_top_pad_large_text">5dp</dimen>
+    <dimen name="subtitle_corner_radius">2dp</dimen>
+    <dimen name="subtitle_outline_width">2dp</dimen>
+    <dimen name="subtitle_shadow_offset">2dp</dimen>
+    <dimen name="subtitle_shadow_radius">2dp</dimen>
     <dimen name="test_mtrl_calendar_day_cornerSize">52dp</dimen>
     <dimen name="tooltip_corner_radius">2dp</dimen>
     <dimen name="tooltip_horizontal_padding">16dp</dimen>
@@ -934,6 +950,7 @@
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
+    <item name="fragment_container_view_tag" type="id"/>
     <item name="ghost_view" type="id"/>
     <item name="ghost_view_holder" type="id"/>
     <item name="home" type="id"/>
@@ -949,6 +966,8 @@
     <item name="mtrl_internal_children_alpha_tag" type="id"/>
     <item name="mtrl_motion_snapshot_view" type="id"/>
     <item name="mtrl_view_tag_bottom_padding" type="id"/>
+    <item name="nav_controller_view_tag" type="id"/>
+    <item name="nav_host_fragment_container" type="id"/>
     <item name="parent_matrix" type="id"/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
@@ -984,14 +1003,18 @@
     <item name="transition_transform" type="id"/>
     <item name="up" type="id"/>
     <item name="view_offset_helper" type="id"/>
+    <id name="view_tree_view_model_store_owner"/>
+    <item name="visible_removing_fragment_view_tag" type="id"/>
     <integer name="abc_config_activityDefaultDur">220</integer>
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="app_bar_elevation_anim_duration">150</integer>
     <integer name="bottom_sheet_slide_duration">150</integer>
     <integer name="cancel_button_image_alpha">127</integer>
+    <integer name="config_navAnimTime">150</integer>
     <integer name="config_tooltipAnimTime">150</integer>
     <integer name="design_snackbar_text_max_lines">2</integer>
     <integer name="design_tab_indicator_anim_duration_ms">300</integer>
+    <integer name="google_play_services_version">12451000</integer>
     <integer name="hide_password_duration">320</integer>
     <integer name="mtrl_badge_max_character_count">4</integer>
     <integer name="mtrl_btn_anim_delay_ms">100</integer>
@@ -1044,10 +1067,34 @@
     <string name="character_counter_pattern" translatable="false">%1$d/%2$d</string>
     <string name="chip_text">Chip text</string>
     <string name="clear_text_end_icon_content_description">Clear text</string>
+    <string msgid="2523291102206661146" name="common_google_play_services_enable_button">Enable</string>
+    <string msgid="227660514972886228" name="common_google_play_services_enable_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t work unless you enable Google Play services.</string>
+    <string msgid="5122002158466380389" name="common_google_play_services_enable_title">Enable Google Play services</string>
+    <string msgid="7153882981874058840" name="common_google_play_services_install_button">Install</string>
+    <string name="common_google_play_services_install_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are missing from your device.</string>
+    <string msgid="7215213145546190223" name="common_google_play_services_install_title">Get Google Play services</string>
+    <string name="common_google_play_services_notification_channel_name">Google Play services availability</string>
+    <string name="common_google_play_services_notification_ticker">Google Play services error</string>
+    <string name="common_google_play_services_unknown_issue"><ns1:g id="app_name">%1$s</ns1:g> is having trouble with Google Play services. Please try again.</string>
+    <string name="common_google_play_services_unsupported_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are not supported by your device.</string>
+    <string msgid="6556509956452265614" name="common_google_play_services_update_button">Update</string>
+    <string msgid="9053896323427875356" name="common_google_play_services_update_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run unless you update Google Play services.</string>
+    <string msgid="6006316683626838685" name="common_google_play_services_update_title">Update Google Play services</string>
+    <string name="common_google_play_services_updating_text"><ns1:g id="app_name">%1$s</ns1:g> won\'t run without Google Play services, which are currently updating.</string>
+    <string name="common_google_play_services_wear_update_text">New version of Google Play services needed. It will update itself shortly.</string>
+    <string name="common_open_on_phone">Open on phone</string>
+    <string name="common_signin_button_text">Sign in</string>
+    <string name="common_signin_button_text_long">Sign in with Google</string>
+    <string name="default_web_client_id" translatable="false">594903343319-hf554i4go7tpr0rg2pka7rl7npi5p24k.apps.googleusercontent.com</string>
     <string name="error_icon_content_description">Error</string>
     <string name="exposed_dropdown_menu_content_description">Show dropdown menu</string>
     <string name="fab_transformation_scrim_behavior" translatable="false">com.google.android.material.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">com.google.android.material.transformation.FabTransformationSheetBehavior</string>
+    <string name="gcm_defaultSenderId" translatable="false">594903343319</string>
+    <string name="google_api_key" translatable="false">AIzaSyD77i-plSVZi6RVXv-xiOa5en-JCcB1Mrg</string>
+    <string name="google_app_id" translatable="false">1:594903343319:android:a91490f8e1a55c9de49092</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD77i-plSVZi6RVXv-xiOa5en-JCcB1Mrg</string>
+    <string name="google_storage_bucket" translatable="false">riri-a2026.appspot.com</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
     <string description="Content description for an icon that appears in the title area of a dialog" name="icon_content_description">Dialog Icon</string>
     <string name="item_view_role_description">Tab</string>
@@ -1101,11 +1148,14 @@
     <string description="a11y string to indicate this button switches the user to choosing a day [CHAR_LIMIT=NONE]" name="mtrl_picker_toggle_to_day_selection">Tap to switch to selecting a day</string>
     <string description="a11y string to indicate this button changes the input mode to a text field [CHAR_LIMIT=NONE]" name="mtrl_picker_toggle_to_text_input_mode">Switch to text input mode</string>
     <string description="a11y string to indicate this button switches the user to choosing a year [CHAR_LIMIT=NONE]" name="mtrl_picker_toggle_to_year_selection">Tap to switch to selecting a year</string>
+    <string name="nav_app_bar_navigate_up_description">Navigate up</string>
+    <string name="nav_app_bar_open_drawer_description">Open navigation drawer</string>
     <string name="password_toggle_content_description">Show password</string>
     <string name="path_password_eye" translatable="false">M12,4.5C7,4.5 2.73,7.61 1,12c1.73,4.39 6,7.5 11,7.5s9.27,-3.11 11,-7.5c-1.73,-4.39 -6,-7.5 -11,-7.5zM12,17c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5 5,2.24 5,5 -2.24,5 -5,5zM12,9c-1.66,0 -3,1.34 -3,3s1.34,3 3,3 3,-1.34 3,-3 -1.34,-3 -3,-3z</string>
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
+    <string name="project_id" translatable="false">riri-a2026</string>
     <string name="search_menu_title">Search</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
@@ -3470,12 +3520,17 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
+    <style name="TextAppearance.Compat.Notification.Info.Media"/>
     <style name="TextAppearance.Compat.Notification.Line2" parent="TextAppearance.Compat.Notification.Info"/>
+    <style name="TextAppearance.Compat.Notification.Line2.Media" parent="TextAppearance.Compat.Notification.Info.Media"/>
+    <style name="TextAppearance.Compat.Notification.Media"/>
     <style name="TextAppearance.Compat.Notification.Time">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
+    <style name="TextAppearance.Compat.Notification.Time.Media"/>
     <style name="TextAppearance.Compat.Notification.Title" parent="@android:style/TextAppearance.StatusBar.EventContent.Title"/>
+    <style name="TextAppearance.Compat.Notification.Title.Media"/>
     <style name="TextAppearance.Design.CollapsingToolbar.Expanded" parent="TextAppearance.AppCompat.Display1">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
   </style>
@@ -4953,6 +5008,13 @@
          -->
         <attr format="reference" name="expandActivityOverflowButtonDrawable"/>
     </declare-styleable>
+    <declare-styleable name="ActivityNavigator">
+        <attr name="android:name"/>
+        <attr format="string" name="action"/>
+        <attr format="string" name="data"/>
+        <attr format="string" name="dataPattern"/>
+        <attr format="string" name="targetPackage"/>
+    </declare-styleable>
     <declare-styleable name="AlertDialog">
         <attr name="android:layout"/>
         <attr format="reference" name="buttonPanelSideLayout"/>
@@ -6312,6 +6374,9 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="CustomAttribute"><attr format="string" name="attributeName"/><attr format="color" name="customColorValue"/><attr format="color" name="customColorDrawableValue"/><attr format="integer" name="customIntegerValue"/><attr format="float" name="customFloatValue"/><attr format="string" name="customStringValue"/><attr format="dimension" name="customDimension"/><attr format="dimension" name="customPixelDimension"/><attr format="boolean" name="customBoolean"/></declare-styleable>
+    <declare-styleable name="DialogFragmentNavigator">
+        <attr name="android:name"/>
+    </declare-styleable>
     <declare-styleable name="DrawerArrowToggle">
         <!-- The drawing color for the bars -->
         <attr format="color" name="color"/>
@@ -6329,6 +6394,10 @@
         <attr format="dimension" name="barLength"/>
         <!-- The thickness (stroke size) for the bar paint -->
         <attr format="dimension" name="thickness"/>
+    </declare-styleable>
+    <declare-styleable name="DrawerLayout">
+        <!-- The height difference between the drawer and the base surface. Only takes effect on API 21 and above -->
+        <attr name="elevation"/>
     </declare-styleable>
     <declare-styleable name="ExtendedFloatingActionButton">
     <!-- Elevation for the ExtendedFloatingActionButton. -->
@@ -6487,6 +6556,18 @@
     <!-- Do not expose publicly, used by ForegroundLinearLayout but never set by any style.  -->
     <attr format="boolean" name="foregroundInsidePadding"/>
   </declare-styleable>
+    <declare-styleable name="Fragment">
+        <attr name="android:name"/>
+        <attr name="android:id"/>
+        <attr name="android:tag"/>
+    </declare-styleable>
+    <declare-styleable name="FragmentContainerView">
+        <attr name="android:name"/>
+        <attr name="android:tag"/>
+    </declare-styleable>
+    <declare-styleable name="FragmentNavigator">
+        <attr name="android:name"/>
+    </declare-styleable>
     <declare-styleable name="GradientColor">
         <!-- Start color of the gradient. -->
         <attr name="android:startColor"/>
@@ -6635,6 +6716,19 @@
         <!-- Amount of pixels by which the drop down should be offset horizontally. -->
         <attr name="android:dropDownHorizontalOffset"/>
     </declare-styleable>
+    <declare-styleable name="LoadingImageView"><attr name="imageAspectRatioAdjust">
+<enum name="none" value="0"/>
+
+<enum name="adjust_width" value="1"/>
+
+<enum name="adjust_height" value="2"/>
+
+</attr>
+
+<attr format="float" name="imageAspectRatio"/>
+
+<attr format="boolean" name="circleCrop"/>
+</declare-styleable>
     <declare-styleable name="MaterialAlertDialog">
     <attr format="dimension" name="backgroundInsetStart"/>
     <attr format="dimension" name="backgroundInsetTop"/>
@@ -7028,6 +7122,41 @@
             <enum name="staticPostLayout" value="2"/>
             <enum name="staticLayout" value="3"/>
         </attr><attr format="color" name="telltales_tailColor"/><attr format="float" name="telltales_tailScale"/></declare-styleable>
+    <declare-styleable name="NavAction">
+        <attr name="android:id"/>
+        <attr format="reference" name="destination"/>
+        <attr format="boolean" name="launchSingleTop"/>
+        <attr format="reference" name="popUpTo"/>
+        <attr format="boolean" name="popUpToInclusive"/>
+        <attr format="reference" name="enterAnim"/>
+        <attr format="reference" name="exitAnim"/>
+        <attr format="reference" name="popEnterAnim"/>
+        <attr format="reference" name="popExitAnim"/>
+    </declare-styleable>
+    <declare-styleable name="NavArgument">
+        <attr name="android:name"/>
+        <attr name="android:defaultValue"/>
+        <attr format="boolean" name="nullable"/>
+        <attr format="string" name="argType"/>
+    </declare-styleable>
+    <declare-styleable name="NavDeepLink">
+        <attr format="string" name="uri"/>
+        <attr format="string" name="action"/>
+        <attr format="string" name="mimeType"/>
+        <attr name="android:autoVerify"/>
+    </declare-styleable>
+    <declare-styleable name="NavGraphNavigator">
+        <attr format="reference" name="startDestination"/>
+    </declare-styleable>
+    <declare-styleable name="NavHost">
+        <attr format="reference" name="navGraph"/>
+    </declare-styleable>
+    <declare-styleable name="NavHostFragment">
+        <attr format="boolean" name="defaultNavHost"/>
+    </declare-styleable>
+    <declare-styleable name="NavInclude">
+        <attr format="reference" name="graph"/>
+    </declare-styleable>
     <declare-styleable name="NavigationView">
     <attr name="android:background"/>
     <attr name="android:fitsSystemWindows"/>
@@ -7083,6 +7212,10 @@
     -->
     <attr name="shapeAppearanceOverlay"/>
   </declare-styleable>
+    <declare-styleable name="Navigator">
+        <attr name="android:id"/>
+        <attr name="android:label"/>
+    </declare-styleable>
     <declare-styleable name="OnClick"><attr name="targetId"/><attr name="clickAction">
             <flag name="toggle" value="0x0011"/>
             <flag name="transitionToEnd" value="0x0001"/>
@@ -7266,6 +7399,25 @@
     <attr format="dimension" name="contentPaddingStart"/>
     <attr name="contentPaddingTop"/>
   </declare-styleable>
+    <declare-styleable name="SignInButton"><attr format="reference" name="buttonSize">
+<enum name="standard" value="0"/>
+
+<enum name="wide" value="1"/>
+
+<enum name="icon_only" value="2"/>
+
+</attr>
+<attr format="reference" name="colorScheme">
+<enum name="dark" value="0"/>
+
+<enum name="light" value="1"/>
+
+<enum name="auto" value="2"/>
+
+</attr>
+
+<attr format="reference|string" name="scopeUris"/>
+</declare-styleable>
     <declare-styleable name="Slider">
     <attr name="android:value"/>
     <attr name="android:valueFrom"/>
