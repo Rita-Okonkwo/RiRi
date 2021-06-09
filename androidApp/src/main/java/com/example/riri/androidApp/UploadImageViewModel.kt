@@ -78,6 +78,7 @@ class UploadImageViewModel : ViewModel() {
                     val downloadUri = task.result
                     api.imageUrl = downloadUri.toString()
                     _imageStatus.value = "succeeded"
+                    println(api.imageUrl)
                 } else {
                     // Handle failures
                     _imageStatus.value = "failed"
@@ -130,5 +131,6 @@ class UploadImageViewModel : ViewModel() {
                 .openInputStream(uri!!), null, bmOptions
         )
     }
+    
 
 }
