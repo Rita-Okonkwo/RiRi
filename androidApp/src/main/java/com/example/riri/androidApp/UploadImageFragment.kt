@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,15 +15,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import java.io.FileOutputStream
+import java.util.*
 
 class UploadImageFragment : Fragment() {
     private val PICK_IMAGE = 50
     private var filePath: Uri? = null
     private lateinit var viewModel: UploadImageViewModel
+    private lateinit var tts: TextToSpeech
     private val tv: TextView by lazy {
-        requireView().findViewById(R.id.textview)
+        requireView().findViewById(R.id.resultText)
     }
 
     private val choose: Button by lazy {
@@ -35,6 +39,22 @@ class UploadImageFragment : Fragment() {
 
     private val imageView: ImageView by lazy {
         requireView().findViewById(R.id.image)
+    }
+
+    private val imageTxt: TextView by lazy {
+        requireView().findViewById(R.id.imagetext)
+    }
+
+    private val play: Button by lazy {
+        requireView().findViewById(R.id.play)
+    }
+
+    private val pause: Button by lazy {
+        requireView().findViewById(R.id.pause)
+    }
+
+    private val stop: Button by lazy {
+        requireView().findViewById(R.id.stop)
     }
 
 
@@ -52,6 +72,11 @@ class UploadImageFragment : Fragment() {
         viewModel.status.observe(viewLifecycleOwner, Observer { status ->
             tv.text = status
         })
+
+        viewModel.text.observe(viewLifecycleOwner, Observer { text ->
+            imageTxt.text = text
+        })
+
         choose.setOnClickListener {
             launchGallery()
         }
@@ -70,6 +95,37 @@ class UploadImageFragment : Fragment() {
         viewModel.image.observe(viewLifecycleOwner, Observer { image ->
             imageView.setImageBitmap(image)
         })
+
+        tts = TextToSpeech(context, TextToSpeech.OnInitListener { status ->
+            if (status != TextToSpeech.ERROR) {
+                tts.language = Locale.UK
+            }
+        })
+
+        play.setOnClickListener {
+            val toSpeak = imageTxt.text.toString()
+            if (toSpeak == "") {
+                Toast.makeText(context, "No text", Toast.LENGTH_SHORT).show()
+            } else {
+                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
+            }
+        }
+
+        pause.setOnClickListener {
+            if (tts.isSpeaking) {
+                tts.stop()
+            } else {
+                Toast.makeText(context, "Not speaking", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        stop.setOnClickListener {
+            if (tts.isSpeaking) {
+                tts.stop()
+            } else {
+                Toast.makeText(context, "Not speaking", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun launchGallery() {

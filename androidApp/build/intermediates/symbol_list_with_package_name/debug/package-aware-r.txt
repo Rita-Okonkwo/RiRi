@@ -1955,6 +1955,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imagetext
 id info
 id invisible
 id inward
@@ -2055,9 +2056,11 @@ id parent_matrix
 id password_toggle
 id path
 id pathRelative
+id pause
 id peekHeight
 id percent
 id pin
+id play
 id position
 id postLayout
 id progress_circular
@@ -2065,6 +2068,7 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id resultText
 id reverseSawtooth
 id right
 id rightToLeft
@@ -2157,7 +2161,6 @@ id textinput_helper_text
 id textinput_placeholder
 id textinput_prefix_text
 id textinput_suffix_text
-id textview
 id time
 id title
 id titleDividerNoCustom
@@ -2382,6 +2385,7 @@ string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
 string chip_text
+string choose
 string clear_text_end_icon_content_description
 string common_google_play_services_enable_button
 string common_google_play_services_enable_text
@@ -2411,6 +2415,7 @@ string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
+string hello
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
@@ -2471,9 +2476,13 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string pause
+string play
 string project_id
 string search_menu_title
 string status_bar_notification_info_overflow
+string stop
+string upload
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style AndroidThemeColorAccentYellow

@@ -32,7 +32,6 @@ class RiRiApi {
     suspend fun getResponse(): Image {
         if (operationLocationUrl == "") {
             kotlin.runCatching {
-                // sendImage("https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Atomist_quote_from_Democritus.png/338px-Atomist_quote_from_Democritus.png")
                 print(imageUrl)
                 sendImage(imageUrl)
             }.onSuccess {

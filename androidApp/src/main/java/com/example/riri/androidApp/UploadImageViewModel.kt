@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.riri.shared.entity.Image
 import com.example.riri.shared.network.RiRiApi
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -19,6 +20,7 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.util.*
+import kotlin.text.StringBuilder
 
 class UploadImageViewModel : ViewModel() {
 
@@ -41,6 +43,12 @@ class UploadImageViewModel : ViewModel() {
     val imageStatus: LiveData<String>
         get() = _imageStatus
 
+    private val _text = MutableLiveData<String>()
+    val text: LiveData<String>
+        get() = _text
+
+    val sb = StringBuilder()
+
     fun retrieveImageResponse() {
         mainScope.launch {
             kotlin.runCatching {
@@ -50,13 +58,20 @@ class UploadImageViewModel : ViewModel() {
                 Log.d("test", it.toString())
                 if (it.status == "succeeded") {
                     _status.value = "done"
+                    if (it.analyzeResult != null && it.analyzeResult?.readResults?.get(0)?.lines?.isEmpty()!!) {
+                        _text.value = "No text in image"
+                    } else {
+                        _text.value = extractText(it)
+                    }
+                    println(_text.value)
+
                 } else {
                     _status.value = "loading"
                     delay(2000)
                     retrieveImageResponse()
                 }
             }.onFailure {
-                _status.value = "failed"
+                _status.value = "fn"
             }
         }
     }
@@ -78,17 +93,18 @@ class UploadImageViewModel : ViewModel() {
                     val downloadUri = task.result
                     api.imageUrl = downloadUri.toString()
                     _imageStatus.value = "succeeded"
+                    println(api.imageUrl)
                 } else {
                     // Handle failures
-                    _imageStatus.value = "failed"
+                    _imageStatus.value = "1failed"
                 }
             }.addOnFailureListener {
                 //handle failures
-                _imageStatus.value = "failed"
+                _imageStatus.value = "2failed"
             }
         } else {
             //handle failures
-            _imageStatus.value = "failed"
+            _imageStatus.value = "3failed"
         }
     }
 
@@ -129,6 +145,17 @@ class UploadImageViewModel : ViewModel() {
             context.contentResolver
                 .openInputStream(uri!!), null, bmOptions
         )
+    }
+
+    private fun extractText(image: Image): String {
+        for (string in image.analyzeResult?.readResults!!) {
+            for (line in string.lines) {
+                sb.append(line.text)
+                sb.append(" ")
+            }
+        }
+        println(sb.toString())
+        return sb.toString()
     }
 
 }
