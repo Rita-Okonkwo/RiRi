@@ -6,4 +6,6 @@
     <string name="play">Play</string>
     <string name="pause">Pause</string>
     <string name="stop">Stop</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="extracted_text_shows_here">Extracted text shows here</string>
 </resources>

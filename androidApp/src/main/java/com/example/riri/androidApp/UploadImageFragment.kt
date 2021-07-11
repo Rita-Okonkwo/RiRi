@@ -12,10 +12,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import java.io.FileOutputStream
 import java.util.*
@@ -26,15 +25,7 @@ class UploadImageFragment : Fragment() {
     private lateinit var viewModel: UploadImageViewModel
     private lateinit var tts: TextToSpeech
     private val tv: TextView by lazy {
-        requireView().findViewById(R.id.resultText)
-    }
-
-    private val choose: Button by lazy {
-        requireView().findViewById(R.id.choose)
-    }
-
-    private val upload: Button by lazy {
-        requireView().findViewById(R.id.upload)
+        requireView().findViewById(R.id.helloText)
     }
 
     private val imageView: ImageView by lazy {
@@ -42,19 +33,24 @@ class UploadImageFragment : Fragment() {
     }
 
     private val imageTxt: TextView by lazy {
-        requireView().findViewById(R.id.imagetext)
+        requireView().findViewById(R.id.extractedtext)
     }
 
-    private val play: Button by lazy {
-        requireView().findViewById(R.id.play)
+
+    private val select: ConstraintLayout by lazy {
+        requireView().findViewById(R.id.frame)
     }
 
-    private val pause: Button by lazy {
-        requireView().findViewById(R.id.pause)
+    private val upload : Button by lazy {
+        requireView().findViewById(R.id.select_btn)
     }
 
-    private val stop: Button by lazy {
-        requireView().findViewById(R.id.stop)
+    private val progress : ProgressBar by lazy {
+        requireView().findViewById(R.id.progressBar)
+    }
+
+    private val playandstop : ImageView by lazy {
+        requireView().findViewById(R.id.playandstop)
     }
 
 
@@ -70,14 +66,21 @@ class UploadImageFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.status.observe(viewLifecycleOwner, Observer { status ->
-            tv.text = status
+            if (status == "loading") {
+                progress.visibility = View.VISIBLE
+            } else {
+                progress.visibility = View.GONE
+            }
+            if (status == "fn") {
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+            }
         })
 
         viewModel.text.observe(viewLifecycleOwner, Observer { text ->
             imageTxt.text = text
         })
 
-        choose.setOnClickListener {
+        select.setOnClickListener {
             launchGallery()
         }
 
@@ -102,28 +105,18 @@ class UploadImageFragment : Fragment() {
             }
         })
 
-        play.setOnClickListener {
+       playandstop.setOnClickListener {
             val toSpeak = imageTxt.text.toString()
             if (toSpeak == "") {
                 Toast.makeText(context, "No text", Toast.LENGTH_SHORT).show()
             } else {
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
-            }
-        }
-
-        pause.setOnClickListener {
-            if (tts.isSpeaking) {
-                tts.stop()
-            } else {
-                Toast.makeText(context, "Not speaking", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        stop.setOnClickListener {
-            if (tts.isSpeaking) {
-                tts.stop()
-            } else {
-                Toast.makeText(context, "Not speaking", Toast.LENGTH_SHORT).show()
+                if(tts.isSpeaking) {
+                    playandstop.setImageResource(R.drawable.play)
+                    tts.stop()
+                } else {
+                    playandstop.setImageResource(R.drawable.stop)
+                    tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null)
+                }
             }
         }
     }
@@ -140,6 +133,7 @@ class UploadImageFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            select.visibility = View.GONE
             if (data == null || data.data == null) {
                 return
             }
