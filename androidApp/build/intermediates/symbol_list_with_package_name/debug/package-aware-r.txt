@@ -65,6 +65,10 @@ animator nav_default_enter_anim
 animator nav_default_exit_anim
 animator nav_default_pop_enter_anim
 animator nav_default_pop_exit_anim
+array com_google_android_gms_fonts_certs
+array com_google_android_gms_fonts_certs_dev
+array com_google_android_gms_fonts_certs_prod
+array preloaded_fonts
 attr action
 attr actionBarDivider
 attr actionBarItemBackground
@@ -1680,6 +1684,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable add_icon
 drawable avd_hide_password
 drawable avd_show_password
 drawable btn_checkbox_checked_mtrl
@@ -1742,6 +1747,7 @@ drawable mtrl_ic_error
 drawable mtrl_popupmenu_background
 drawable mtrl_popupmenu_background_dark
 drawable mtrl_tabs_default_indicator
+drawable mybutton
 drawable navigation_empty_icon
 drawable notification_action_background
 drawable notification_bg
@@ -1755,9 +1761,14 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable play
+drawable stop
 drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+font pacifico
+font raleway
+font raleway_thin
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -1827,6 +1838,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id add_image
 id adjust_height
 id adjust_width
 id alertTitle
@@ -1864,7 +1876,6 @@ id chip1
 id chip2
 id chip3
 id chip_group
-id choose
 id chronometer
 id circle_center
 id clear_text
@@ -1923,6 +1934,7 @@ id enterAlwaysCollapsed
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
+id extractedtext
 id fade
 id fill
 id fill_horizontal
@@ -1934,6 +1946,7 @@ id flip
 id floating
 id forever
 id fragment_container_view_tag
+id frame
 id ghost_view
 id ghost_view_holder
 id gone
@@ -1944,6 +1957,7 @@ id grouping
 id groups
 id guideline
 id header_title
+id helloText
 id hideable
 id home
 id homeAsUp
@@ -1955,7 +1969,6 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
-id imagetext
 id info
 id invisible
 id inward
@@ -2056,19 +2069,18 @@ id parent_matrix
 id password_toggle
 id path
 id pathRelative
-id pause
 id peekHeight
 id percent
 id pin
-id play
+id playandstop
 id position
 id postLayout
+id progressBar
 id progress_circular
 id progress_horizontal
 id radio
 id ratio
 id rectangles
-id resultText
 id reverseSawtooth
 id right
 id rightToLeft
@@ -2096,7 +2108,9 @@ id search_mag_icon
 id search_plate
 id search_src_text
 id search_voice_btn
+id select_btn
 id select_dialog_listview
+id select_text
 id selected
 id selection_type
 id shortcut
@@ -2112,6 +2126,7 @@ id snackbar_text
 id snap
 id snapMargins
 id spacer
+id splashtext
 id spline
 id split_action_bar
 id spread
@@ -2181,7 +2196,6 @@ id unchecked
 id uniform
 id unlabeled
 id up
-id upload
 id uploadImageFragment
 id useLogo
 id view_offset_helper
@@ -2257,6 +2271,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
+layout activity_splash_screen
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -2408,6 +2423,7 @@ string common_signin_button_text_long
 string default_web_client_id
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
+string extracted_text_shows_here
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string gcm_defaultSenderId
@@ -2483,6 +2499,7 @@ string search_menu_title
 string status_bar_notification_info_overflow
 string stop
 string upload
+string upload_image
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style AndroidThemeColorAccentYellow

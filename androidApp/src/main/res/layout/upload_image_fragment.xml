@@ -2,108 +2,154 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FEFEE3"
     tools:context=".UploadImageFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#FEFEE3">
 
         <TextView
-            android:id="@+id/resultText"
+            android:id="@+id/helloText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="78dp"
             android:layout_marginTop="78dp"
             android:layout_marginEnd="78dp"
+            android:fontFamily="@font/raleway"
             android:text="@string/hello"
             android:textAlignment="center"
+            android:textColor="#444053"
+            android:textSize="25sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="269dp"
+            android:layout_height="202dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/resultText"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toBottomOf="@+id/helloText"
+            tools:src="@tools:sample/avatars"
+            tools:visibility="gone" />
 
-        <Button
-            android:id="@+id/choose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frame"
+            android:layout_width="266dp"
+            android:layout_height="198dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:text="@string/choose"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="#C4C4C4"
+            app:layout_constraintBottom_toTopOf="@+id/select_btn"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image" />
+            app:layout_constraintTop_toBottomOf="@+id/helloText">
+
+            <ImageView
+                android:id="@+id/add_image"
+                android:layout_width="21dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="32dp"
+                android:src="@drawable/add_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/select_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/raleway"
+                android:text="Select your Image"
+                android:textColor="#444053"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_image" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:id="@+id/select_btn"
+            android:layout_width="149dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="350dp"
             android:layout_marginEnd="24dp"
-            android:text="@string/upload"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/mybutton"
+            android:padding="10dp"
+            android:text="@string/upload_image"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/extractedtext"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/imagetext"
-            android:layout_width="wrap_content"
+            android:id="@+id/extractedtext"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="78dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="78dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/hello"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="450dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/raleway"
+            android:hint="@string/extracted_text_shows_here"
             android:textAlignment="center"
+            android:textColorHint="#C4C4C4"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/playandstop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="450dp"
+            android:layout_marginEnd="24dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/extractedtext"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/playandstop"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="550dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/play"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/upload" />
-
-        <Button
-            android:id="@+id/play"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/play"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagetext" />
-
-        <Button
-            android:id="@+id/pause"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/pause"
-            app:layout_constraintStart_toEndOf="@+id/play"
-            app:layout_constraintTop_toBottomOf="@+id/imagetext" />
-
-        <Button
-            android:id="@+id/stop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/stop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/pause"
-            app:layout_constraintTop_toBottomOf="@+id/imagetext" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

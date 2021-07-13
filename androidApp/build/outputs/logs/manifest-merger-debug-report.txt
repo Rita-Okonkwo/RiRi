@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-15:12
-INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-15:12
-INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-15:12
-INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-15:12
+ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-27:12
 MERGED from [:shared] C:\Users\user\Downloads\RiRi\shared\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-13:12
 MERGED from [androidx.navigation:navigation-ui-ktx:2.3.5] C:\Users\user\.gradle\caches\transforms-2\files-2.1\749070cf233901f199eb5aae319d475e\navigation-ui-ktx-2.3.5\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.navigation:navigation-ui:2.3.5] C:\Users\user\.gradle\caches\transforms-2\files-2.1\6fd840c2cdb880a438c17f2d0fa8dad1\navigation-ui-2.3.5\AndroidManifest.xml:17:1-24:12
@@ -82,25 +82,25 @@ MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\user\.gradle\caches
 MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\0969991ea2f7880cf6bed679b8bd4368\savedstate-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\c1bdb5de43dbee549a53282a6393c6e6\lifecycle-runtime-2.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\bf628946e995f9382a5eb71fe6eba9b2\annotation-experimental-1.0.0\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-15:12
-INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-15:12
-INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-15:12
+INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-27:12
 	package
-		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:70-107
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:3:5-42
 		INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml
-		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-15:12
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-27:12
 		INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml
-		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-15:12
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:1-27:12
 		INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:3:5-67
+ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:5:5-67
 MERGED from [:shared] C:\Users\user\Downloads\RiRi\shared\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-67
 MERGED from [:shared] C:\Users\user\Downloads\RiRi\shared\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-67
 MERGED from [com.google.firebase:firebase-storage:19.2.2] C:\Users\user\.gradle\caches\transforms-2\files-2.1\29e90d8a87dcee5da37cef22208c1bd0\firebase-storage-19.2.2\AndroidManifest.xml:27:5-67
@@ -116,9 +116,9 @@ MERGED from [com.google.android.gms:play-services-measurement-impl:18.0.3] C:\Us
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:18.0.3] C:\Users\user\.gradle\caches\transforms-2\files-2.1\4462acba785cca8782048abf388d5d42\play-services-measurement-sdk-api-18.0.3\AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:18.0.3] C:\Users\user\.gradle\caches\transforms-2\files-2.1\4462acba785cca8782048abf388d5d42\play-services-measurement-sdk-api-18.0.3\AndroidManifest.xml:23:5-67
 	android:name
-		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:3:22-64
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:4:5-14:19
+ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:7:5-25:19
 MERGED from [com.google.android.material:material:1.3.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\4c5f3ad2a8736b1d9fde0bde7774760e\material-1.3.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.3.0] C:\Users\user\.gradle\caches\transforms-2\files-2.1\4c5f3ad2a8736b1d9fde0bde7774760e\material-1.3.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\user\.gradle\caches\transforms-2\files-2.1\4a55a2ee49ed457cc66564a31bff4785\constraintlayout-2.0.4\AndroidManifest.xml:9:5-20
@@ -168,25 +168,37 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\us
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.3.2] C:\Users\user\.gradle\caches\transforms-2\files-2.1\471ed94b523e5f6a2a989ed271fc0938\core-1.3.2\AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:6:13-39
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:9:9-35
+	android:label
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:10:9-29
 	android:allowBackup
-		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:5:13-40
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:8:9-36
 	android:theme
-		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:7:13-44
-activity#com.example.riri.androidApp.MainActivity
-ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:8:9-13:20
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:11:9-40
+activity#com.example.riri.androidApp.SplashScreenActivity
+ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:12:9-18:20
 	android:name
-		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:8:19-47
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:12:19-55
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:9:13-12:29
+ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:13:13-17:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:10:17-68
+ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:14:17-69
 	android:name
-		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:10:25-66
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:14:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:11:17-76
+ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:16:17-77
 	android:name
-		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:11:27-74
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:16:27-74
+activity#com.example.riri.androidApp.MainActivity
+ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:19:9-20:20
+	android:name
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:19:19-47
+meta-data#preloaded_fonts
+ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:22:9-24:57
+	android:resource
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:24:13-54
+	android:name
+		ADDED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml:23:13-43
 uses-sdk
 INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\user\Downloads\RiRi\androidApp\src\main\AndroidManifest.xml
