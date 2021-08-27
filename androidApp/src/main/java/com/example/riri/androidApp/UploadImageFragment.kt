@@ -53,6 +53,10 @@ class UploadImageFragment : Fragment() {
         requireView().findViewById(R.id.playandstop)
     }
 
+    private val urlImage : EditText by lazy {
+        requireView().findViewById(R.id.url)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,7 +90,13 @@ class UploadImageFragment : Fragment() {
 
         upload.setOnClickListener {
             Log.d("uri", filePath.toString())
-            viewModel.uploadImage(filePath)
+            val urlString = urlImage.text.toString()
+            Log.d("edit", urlString)
+            if (urlString.isEmpty()) {
+                viewModel.uploadImage(filePath)
+            } else {
+                viewModel.uploadImageUrl(urlString)
+            }
         }
 
         viewModel.imageStatus.observe(viewLifecycleOwner, Observer { imageStatus ->

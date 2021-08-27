@@ -76,6 +76,11 @@ class UploadImageViewModel : ViewModel() {
         }
     }
 
+    fun uploadImageUrl(url : String) {
+        api.imageUrl = url
+        _imageStatus.value = "succeeded"
+    }
+
     fun uploadImage(filePath: Uri?) {
         if (filePath != null) {
             val ref = storageReference.child("uploads/" + UUID.randomUUID().toString())
@@ -96,15 +101,15 @@ class UploadImageViewModel : ViewModel() {
                     println(api.imageUrl)
                 } else {
                     // Handle failures
-                    _imageStatus.value = "1failed"
+                    _imageStatus.value = "failed"
                 }
             }.addOnFailureListener {
                 //handle failures
-                _imageStatus.value = "2failed"
+                _imageStatus.value = "failed"
             }
         } else {
             //handle failures
-            _imageStatus.value = "3failed"
+            _imageStatus.value = "nullfailed"
         }
     }
 
