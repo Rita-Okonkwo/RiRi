@@ -30,7 +30,6 @@ class TextListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TextListViewModel::class.java)
-        // TODO: Use the ViewModel
         val recyclerView : RecyclerView = requireView().findViewById(R.id.listRV)
         val adapter = TextListAdapter{ text, view ->
             textListOnClick(text, view)
