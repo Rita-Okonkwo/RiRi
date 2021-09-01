@@ -1,0 +1,41 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:2:1-4:12
+INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:2:1-4:12
+INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:2:1-4:12
+INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:2:1-4:12
+INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:2:1-4:12
+INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:2:1-4:12
+INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:2:1-4:12
+	package
+		ADDED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:2:70-103
+		INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+		INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+		ADDED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:2:1-4:12
+		INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+		ADDED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:2:1-4:12
+		INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:3:5-66
+	android:name
+		ADDED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml:3:22-64
+uses-sdk
+INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+		ADDED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+		INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+		ADDED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml
+		INJECTED from C:\Users\user\Downloads\RiRi\shared\src\androidMain\AndroidManifest.xml

@@ -9,4 +9,6 @@
     <string name="upload_image">Upload Image</string>
     <string name="extracted_text_shows_here">Extracted text shows here</string>
     <string name="riri">RiRi</string>
+    <string name="play_text">Play text audio</string>
+    <string name="pause_text">Pause text audio</string>
 </resources>

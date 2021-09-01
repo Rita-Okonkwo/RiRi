@@ -1,4 +1,4 @@
-package com.example.riri.androidApp
+package com.example.riri.androidApp.uploadImage
 
 import android.app.Activity
 import android.content.Intent
@@ -14,8 +14,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
+import com.example.riri.androidApp.R
 import java.io.FileOutputStream
 import java.util.*
 

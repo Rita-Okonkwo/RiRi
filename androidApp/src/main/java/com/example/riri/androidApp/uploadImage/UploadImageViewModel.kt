@@ -1,4 +1,4 @@
-package com.example.riri.androidApp
+package com.example.riri.androidApp.uploadImage
 
 import android.content.Context
 import android.graphics.Bitmap
