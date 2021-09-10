@@ -9,37 +9,38 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.riri.androidApp.R
+import com.example.riri.shared.data.models.TextObjectDataModel
 
 class TextListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = TextListFragment()
-    }
-
     private lateinit var viewModel: TextListViewModel
-    private lateinit var textList : ArrayList<String>
+    private lateinit var textList: ArrayList<TextObjectDataModel>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        textList =  arrayListOf("rita", "nkem", "okonkwo")
         return inflater.inflate(R.layout.text_list_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(TextListViewModel::class.java)
-        val recyclerView : RecyclerView = requireView().findViewById(R.id.listRV)
-        val adapter = TextListAdapter{ text, view ->
-            textListOnClick(text, view)
+        viewModel = ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
+            .create(TextListViewModel::class.java)
+        textList = viewModel.getTextList() as ArrayList<TextObjectDataModel>
+        if (textList.isNotEmpty()) {
+            val recyclerView: RecyclerView = requireView().findViewById(R.id.listRV)
+            val adapter = TextListAdapter { text, view ->
+                textListOnClick(text, view)
+            }
+            adapter.submitList(textList)
+            recyclerView.adapter = adapter
         }
-        adapter.submitList(textList)
-        recyclerView.adapter = adapter
+
 
     }
 
-    private fun textListOnClick(sample : String, view : View) {
+    private fun textListOnClick(textObject: TextObjectDataModel, view: View) {
         if (view.id == R.id.play_audio) {
             Toast.makeText(context, "play audio", Toast.LENGTH_SHORT).show()
         } else {

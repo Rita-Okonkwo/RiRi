@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.riri.androidApp.R
 import java.io.FileOutputStream
 import java.util.*
@@ -41,20 +42,24 @@ class UploadImageFragment : Fragment() {
         requireView().findViewById(R.id.frame)
     }
 
-    private val upload : Button by lazy {
+    private val upload: Button by lazy {
         requireView().findViewById(R.id.select_btn)
     }
 
-    private val progress : ProgressBar by lazy {
+    private val progress: ProgressBar by lazy {
         requireView().findViewById(R.id.progressBar)
     }
 
-    private val playandstop : ImageView by lazy {
+    private val playandstop: ImageView by lazy {
         requireView().findViewById(R.id.playandstop)
     }
 
-    private val urlImage : EditText by lazy {
+    private val urlImage: EditText by lazy {
         requireView().findViewById(R.id.url)
+    }
+
+    private val saveBtn: Button by lazy {
+        requireView().findViewById(R.id.save)
     }
 
 
@@ -63,7 +68,8 @@ class UploadImageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.upload_image_fragment, container, false)
-        viewModel = ViewModelProvider(this).get(UploadImageViewModel::class.java)
+        viewModel = ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
+            .create(UploadImageViewModel::class.java)
         return view
     }
 
@@ -89,14 +95,7 @@ class UploadImageFragment : Fragment() {
         }
 
         upload.setOnClickListener {
-            Log.d("uri", filePath.toString())
-            val urlString = urlImage.text.toString()
-            Log.d("edit", urlString)
-            if (urlString.isEmpty()) {
-                viewModel.uploadImage(filePath)
-            } else {
-                viewModel.uploadImageUrl(urlString)
-            }
+            uploadImage()
         }
 
         viewModel.imageStatus.observe(viewLifecycleOwner, Observer { imageStatus ->
@@ -115,19 +114,40 @@ class UploadImageFragment : Fragment() {
             }
         })
 
-       playandstop.setOnClickListener {
-            val toSpeak = imageTxt.text.toString()
-            if (toSpeak == "") {
-                Toast.makeText(context, "No text", Toast.LENGTH_SHORT).show()
+        playandstop.setOnClickListener {
+            playAndStop()
+        }
+
+        saveBtn.setOnClickListener {
+            viewModel.saveText(imageTxt.text.toString())
+            findNavController().navigate(R.id.action_uploadImageFragment_to_textListFragment)
+        }
+
+    }
+
+    private fun playAndStop() {
+        val toSpeak = imageTxt.text.toString()
+        if (toSpeak == "") {
+            Toast.makeText(context, "No text", Toast.LENGTH_SHORT).show()
+        } else {
+            if (tts.isSpeaking) {
+                playandstop.setImageResource(R.drawable.play)
+                tts.stop()
             } else {
-                if(tts.isSpeaking) {
-                    playandstop.setImageResource(R.drawable.play)
-                    tts.stop()
-                } else {
-                    playandstop.setImageResource(R.drawable.stop)
-                    tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null)
-                }
+                playandstop.setImageResource(R.drawable.stop)
+                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null)
             }
+        }
+    }
+
+    private fun uploadImage() {
+        Log.d("uri", filePath.toString())
+        val urlString = urlImage.text.toString()
+        Log.d("edit", urlString)
+        if (urlString.isEmpty()) {
+            viewModel.uploadImage(filePath)
+        } else {
+            viewModel.uploadImageUrl(urlString)
         }
     }
 

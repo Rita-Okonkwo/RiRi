@@ -1,0 +1,16 @@
+CREATE TABLE TextObject (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    text TEXT NOT NULL
+);
+
+insertText:
+INSERT INTO TextObject(text)
+VALUES( ?);
+
+deleteText:
+DELETE FROM TextObject
+WHERE id = ?;
+
+getText:
+SELECT TextObject.*
+FROM TextObject;
