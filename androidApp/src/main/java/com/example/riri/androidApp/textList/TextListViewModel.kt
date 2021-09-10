@@ -14,4 +14,8 @@ class TextListViewModel(application: Application) : AndroidViewModel(application
     fun getTextList(): List<TextObjectDataModel> {
         return textObjectRepository.getTexts()
     }
+
+    fun deleteText(textObjectDataModel: TextObjectDataModel) {
+        textObjectRepository.deleteText(textObjectDataModel.id)
+    }
 }
