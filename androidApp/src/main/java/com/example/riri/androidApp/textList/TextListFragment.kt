@@ -37,10 +37,7 @@ class TextListFragment : Fragment() {
             textListOnClick(text, view)
         }
         recyclerView.adapter = adapter
-        textList = viewModel.getTextList() as ArrayList<TextObjectDataModel>
-        if (textList.isNotEmpty()) {
-            adapter.submitList(textList)
-        }
+        getTextList()
     }
 
     private fun textListOnClick(textObject: TextObjectDataModel, view: View) {
@@ -85,12 +82,16 @@ class TextListFragment : Fragment() {
 
     private fun deleteText(textObject: TextObjectDataModel) {
         viewModel.deleteText(textObject)
-        textList = viewModel.getTextList() as ArrayList<TextObjectDataModel>
-        adapter.submitList(textList)
+        getTextList()
     }
 
     private fun playAudio() {
         //to do
+    }
+
+    private fun getTextList() {
+        textList = viewModel.getTextList() as ArrayList<TextObjectDataModel>
+        adapter.submitList(textList)
     }
 
 }
