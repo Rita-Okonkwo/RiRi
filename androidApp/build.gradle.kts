@@ -1,9 +1,10 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("kotlin-android-extensions")
     id("com.google.gms.google-services")
     id("kotlin-android")
+    id("androidx.navigation.safeargs.kotlin")
+
 }
 
 group = "com.example.riri"
@@ -18,6 +19,7 @@ repositories {
 
 dependencies {
     implementation(project(":shared"))
+    compileOnly("io.realm.kotlin:library:0.4.1")
     implementation("com.google.android.material:material:1.3.0")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
@@ -38,11 +40,11 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
     defaultConfig {
         applicationId = "com.example.riri.androidApp"
         minSdkVersion(24)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -51,5 +53,10 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+    }
+
+    compileOptions {
+        sourceCompatibility (JavaVersion.VERSION_1_8)
+                targetCompatibility (JavaVersion.VERSION_1_8)
     }
 }

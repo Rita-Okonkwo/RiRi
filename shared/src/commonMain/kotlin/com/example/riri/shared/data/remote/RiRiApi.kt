@@ -1,4 +1,4 @@
-package com.example.riri.shared.network
+package com.example.riri.shared.data.remote
 
 import com.example.riri.shared.entity.Image
 import com.example.riri.shared.entity.Url
@@ -8,6 +8,7 @@ import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.*
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.*
+
 
 class RiRiApi {
     var operationLocationUrl: String? = ""

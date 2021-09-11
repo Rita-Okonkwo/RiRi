@@ -1,16 +1,20 @@
-package com.example.riri.androidApp
+package com.example.riri.androidApp.uploadImage
 
+import android.app.Application
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.riri.shared.cache.TextObjectDatabaseDriverFactory
 import com.example.riri.shared.entity.Image
-import com.example.riri.shared.network.RiRiApi
+import com.example.riri.shared.data.remote.RiRiApi
+import com.example.riri.shared.data.TextObjectRepository
+import com.example.riri.shared.data.local.TextSqlDelightDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.MainScope
@@ -22,7 +26,7 @@ import java.io.IOException
 import java.util.*
 import kotlin.text.StringBuilder
 
-class UploadImageViewModel : ViewModel() {
+class UploadImageViewModel(application: Application) : AndroidViewModel(application) {
 
     var currentPhotoPath = MutableLiveData<String?>()
 
@@ -31,7 +35,12 @@ class UploadImageViewModel : ViewModel() {
     private val storageReference = storage.reference
 
     private val mainScope = MainScope()
+
     private val api = RiRiApi()
+
+
+    private val textObjectRepository =
+        TextObjectRepository(TextSqlDelightDatabase(TextObjectDatabaseDriverFactory(application.applicationContext)))
 
     var image = MutableLiveData<Bitmap>()
 
@@ -76,7 +85,7 @@ class UploadImageViewModel : ViewModel() {
         }
     }
 
-    fun uploadImageUrl(url : String) {
+    fun uploadImageUrl(url: String) {
         api.imageUrl = url
         _imageStatus.value = "succeeded"
     }
@@ -161,6 +170,12 @@ class UploadImageViewModel : ViewModel() {
         }
         println(sb.toString())
         return sb.toString()
+    }
+
+    fun saveText(audioText: String) {
+        if (audioText.isNotEmpty()) {
+            textObjectRepository.addText(audioText)
+        }
     }
 
 }

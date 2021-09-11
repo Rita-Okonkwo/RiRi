@@ -4,14 +4,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
-
 @Serializable
 data class Url(
-    @SerialName("url")
-    val url: String
+        @SerialName("url")
+        val url: String
 )
-
-
 
 @Serializable
 data class Image(
@@ -22,7 +19,7 @@ data class Image(
         @SerialName("lastUpdatedDateTime")
         val lastUpdatedDateTime: String,
         @SerialName("analyzeResult")
-        val analyzeResult: AnalyzeResult ? = null
+        val analyzeResult: AnalyzeResult? = null
 )
 
 @Serializable
