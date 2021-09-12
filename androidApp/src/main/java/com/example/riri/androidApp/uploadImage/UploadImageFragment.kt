@@ -7,6 +7,7 @@ import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.speech.tts.UtteranceProgressListener
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -109,8 +110,24 @@ class UploadImageFragment : Fragment() {
         })
 
         tts = TextToSpeech(context, TextToSpeech.OnInitListener { status ->
-            if (status != TextToSpeech.ERROR) {
+            if (status == TextToSpeech.SUCCESS) {
                 tts.language = Locale.UK
+                tts.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+                    override fun onStart(utteranceId: String) {
+                        Log.i("TextToSpeech", "On Start")
+                    }
+
+                    override fun onDone(utteranceId: String) {
+                        Log.i("TextToSpeech", "On Done")
+                        requireActivity().runOnUiThread {
+                            playandstop.setImageResource(R.drawable.play)
+                        }
+                    }
+
+                    override fun onError(utteranceId: String) {
+                        Log.i("TextToSpeech", "On Error")
+                    }
+                })
             }
         })
 
@@ -129,14 +146,14 @@ class UploadImageFragment : Fragment() {
         val toSpeak = imageTxt.text.toString()
         if (toSpeak == "") {
             Toast.makeText(context, "No text", Toast.LENGTH_SHORT).show()
+        } else if (tts.isSpeaking && playandstop.tag == getString(R.string.stop)) {
+            playandstop.setImageResource(R.drawable.play)
+            playandstop.tag = getString(R.string.play)
+            tts.stop()
         } else {
-            if (tts.isSpeaking) {
-                playandstop.setImageResource(R.drawable.play)
-                tts.stop()
-            } else {
-                playandstop.setImageResource(R.drawable.stop)
-                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null)
-            }
+            playandstop.setImageResource(R.drawable.stop)
+            playandstop.tag = getString(R.string.stop)
+            tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "audiotext")
         }
     }
 
