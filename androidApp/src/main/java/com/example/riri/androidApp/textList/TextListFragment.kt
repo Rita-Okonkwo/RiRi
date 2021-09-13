@@ -2,6 +2,7 @@ package com.example.riri.androidApp.textList
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
@@ -90,7 +91,7 @@ class TextListFragment : Fragment() {
                     true
                 }
                 R.id.action_share -> {
-                    shareText()
+                    shareText(textObject)
                     true
                 }
                 R.id.action_delete -> {
@@ -110,8 +111,15 @@ class TextListFragment : Fragment() {
         Toast.makeText(context, "Text copied!", Toast.LENGTH_SHORT).show()
     }
 
-    private fun shareText() {
-        //to do
+    private fun shareText(textObject: TextObjectDataModel) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, textObject.audioText)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
     private fun deleteText(textObject: TextObjectDataModel) {
