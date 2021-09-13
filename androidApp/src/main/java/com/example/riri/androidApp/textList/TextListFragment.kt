@@ -1,5 +1,7 @@
 package com.example.riri.androidApp.textList
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
@@ -10,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -83,7 +86,7 @@ class TextListFragment : Fragment() {
         popUpMenu.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_copy -> {
-                    copyText()
+                    copyText(textObject)
                     true
                 }
                 R.id.action_share -> {
@@ -100,8 +103,11 @@ class TextListFragment : Fragment() {
         popUpMenu.show()
     }
 
-    private fun copyText() {
-        //to do
+    private fun copyText(textObject: TextObjectDataModel) {
+        val clipboard = getSystemService(requireContext(), ClipboardManager::class.java)
+        val clip: ClipData = ClipData.newPlainText("extracted text", textObject.audioText)
+        clipboard?.setPrimaryClip(clip)
+        Toast.makeText(context, "Text copied!", Toast.LENGTH_SHORT).show()
     }
 
     private fun shareText() {
