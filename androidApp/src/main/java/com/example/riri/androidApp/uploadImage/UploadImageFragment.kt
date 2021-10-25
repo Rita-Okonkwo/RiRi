@@ -1,9 +1,12 @@
 package com.example.riri.androidApp.uploadImage
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -14,102 +17,73 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.Observer
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.riri.androidApp.R
+import com.example.riri.androidApp.databinding.UploadImageFragmentBinding
 import java.io.FileOutputStream
 import java.util.*
+import java.util.jar.Manifest
 
 class UploadImageFragment : Fragment() {
+    private var _binding: UploadImageFragmentBinding? = null
+    private val binding get() = _binding!!
     private val PICK_IMAGE = 50
     private var filePath: Uri? = null
     private lateinit var viewModel: UploadImageViewModel
     private lateinit var tts: TextToSpeech
-    private val tv: TextView by lazy {
-        requireView().findViewById(R.id.helloText)
-    }
-
-    private val imageView: ImageView by lazy {
-        requireView().findViewById(R.id.image)
-    }
-
-    private val imageTxt: TextView by lazy {
-        requireView().findViewById(R.id.extractedtext)
-    }
-
-
-    private val select: ConstraintLayout by lazy {
-        requireView().findViewById(R.id.frame)
-    }
-
-    private val upload: Button by lazy {
-        requireView().findViewById(R.id.select_btn)
-    }
-
-    private val progress: ProgressBar by lazy {
-        requireView().findViewById(R.id.progressBar)
-    }
-
-    private val playandstop: ImageView by lazy {
-        requireView().findViewById(R.id.playandstop)
-    }
-
-    private val urlImage: EditText by lazy {
-        requireView().findViewById(R.id.url)
-    }
-
-    private val saveBtn: Button by lazy {
-        requireView().findViewById(R.id.save)
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.upload_image_fragment, container, false)
+    ): View {
+        _binding = UploadImageFragmentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
             .create(UploadImageViewModel::class.java)
-        return view
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.status.observe(viewLifecycleOwner, Observer { status ->
+        viewModel.status.observe(viewLifecycleOwner, { status ->
             if (status == "loading") {
-                progress.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.VISIBLE
             } else {
-                progress.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
             }
             if (status == "fn") {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
             }
         })
 
-        viewModel.text.observe(viewLifecycleOwner, Observer { text ->
-            imageTxt.text = text
+        viewModel.text.observe(viewLifecycleOwner, { text ->
+            binding.extractedtext.text = text
         })
 
-        select.setOnClickListener {
-            launchGallery()
+        binding.frame.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= 22) {
+                checkAndRequestForPermission()
+            } else {
+                launchGallery()
+            }
         }
 
-        upload.setOnClickListener {
+        binding.selectBtn.setOnClickListener {
             uploadImage()
         }
 
-        viewModel.imageStatus.observe(viewLifecycleOwner, Observer { imageStatus ->
+        viewModel.imageStatus.observe(viewLifecycleOwner, { imageStatus ->
             if (imageStatus == "succeeded") {
                 viewModel.retrieveImageResponse()
             }
         })
 
-        viewModel.image.observe(viewLifecycleOwner, Observer { image ->
-            imageView.setImageBitmap(image)
+        viewModel.image.observe(viewLifecycleOwner, { image ->
+            binding.image.setImageBitmap(image)
         })
 
-        tts = TextToSpeech(context, TextToSpeech.OnInitListener { status ->
+        tts = TextToSpeech(context) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 tts.language = Locale.UK
                 tts.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
@@ -120,7 +94,7 @@ class UploadImageFragment : Fragment() {
                     override fun onDone(utteranceId: String) {
                         Log.i("TextToSpeech", "On Done")
                         requireActivity().runOnUiThread {
-                            playandstop.setImageResource(R.drawable.play)
+                            binding.playandstop.setImageResource(R.drawable.play)
                         }
                     }
 
@@ -129,37 +103,57 @@ class UploadImageFragment : Fragment() {
                     }
                 })
             }
-        })
+        }
 
-        playandstop.setOnClickListener {
+        binding.playandstop.setOnClickListener {
             playAndStop()
         }
 
-        saveBtn.setOnClickListener {
-            viewModel.saveText(imageTxt.text.toString())
+        binding.save.setOnClickListener {
+            viewModel.saveText(binding.extractedtext.text.toString())
             findNavController().navigate(R.id.action_uploadImageFragment_to_textListFragment)
         }
 
     }
 
+    private fun checkAndRequestForPermission() {
+        if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 100)
+        } else {
+            launchGallery()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == 100) {
+            if (permissions[0] == android.Manifest.permission.READ_EXTERNAL_STORAGE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                launchGallery()
+            }
+        }
+    }
+
     private fun playAndStop() {
-        val toSpeak = imageTxt.text.toString()
+        val toSpeak = binding.extractedtext.text.toString()
         if (toSpeak == "") {
             Toast.makeText(context, "No text", Toast.LENGTH_SHORT).show()
-        } else if (tts.isSpeaking && playandstop.tag == getString(R.string.stop)) {
-            playandstop.setImageResource(R.drawable.play)
-            playandstop.tag = getString(R.string.play)
+        } else if (tts.isSpeaking && binding.playandstop.tag == getString(R.string.stop)) {
+            binding.playandstop.setImageResource(R.drawable.play)
+            binding.playandstop.tag = getString(R.string.play)
             tts.stop()
         } else {
-            playandstop.setImageResource(R.drawable.stop)
-            playandstop.tag = getString(R.string.stop)
+            binding.playandstop.setImageResource(R.drawable.stop)
+            binding.playandstop.tag = getString(R.string.stop)
             tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "audiotext")
         }
     }
 
     private fun uploadImage() {
         Log.d("uri", filePath.toString())
-        val urlString = urlImage.text.toString()
+        val urlString = binding.url.text.toString()
         Log.d("edit", urlString)
         if (urlString.isEmpty()) {
             viewModel.uploadImage(filePath)
@@ -180,7 +174,7 @@ class UploadImageFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
-            select.visibility = View.GONE
+            binding.frame.visibility = View.GONE
             if (data == null || data.data == null) {
                 return
             }
