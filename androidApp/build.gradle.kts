@@ -40,11 +40,11 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(31)
     defaultConfig {
         applicationId = "com.example.riri.androidApp"
-        minSdkVersion(24)
-        targetSdkVersion(30)
+        minSdkVersion(21)
+        targetSdkVersion(31)
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -58,5 +58,9 @@ android {
     compileOptions {
         sourceCompatibility (JavaVersion.VERSION_1_8)
                 targetCompatibility (JavaVersion.VERSION_1_8)
+    }
+
+    buildFeatures {
+        viewBinding =true
     }
 }
