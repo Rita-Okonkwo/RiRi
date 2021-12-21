@@ -10,21 +10,20 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.riri.shared.cache.TextObjectDatabaseDriverFactory
-import com.example.riri.shared.entity.Image
-import com.example.riri.shared.data.remote.RiRiApi
 import com.example.riri.shared.data.TextObjectRepository
 import com.example.riri.shared.data.local.TextSqlDelightDatabase
+import com.example.riri.shared.data.remote.RiRiApi
+import com.example.riri.shared.entity.Image
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
+import java.net.URL
 import java.util.*
-import kotlin.text.StringBuilder
 
 class UploadImageViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -33,8 +32,6 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
     private val storage = Firebase.storage
 
     private val storageReference = storage.reference
-
-    private val mainScope = MainScope()
 
     private val api = RiRiApi()
 
@@ -58,8 +55,9 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
 
     val sb = StringBuilder()
 
+
     fun retrieveImageResponse() {
-        mainScope.launch {
+        viewModelScope.launch {
             kotlin.runCatching {
                 _status.value = "loading"
                 api.getResponse()
@@ -85,10 +83,29 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
-    fun uploadImageUrl(url: String) {
+    fun uploadImgUrl(url: String) {
+        viewModelScope.launch {
+            uploadImageUrl(url)
+        }
+    }
+
+    suspend fun uploadImageUrl(url: String) {
+        val imageUrl = URL(url)
+        val bmp = decodeBmp(imageUrl)
+        println("url:" + bmp?.byteCount)
         api.imageUrl = url
         _imageStatus.value = "succeeded"
     }
+
+    suspend fun decodeBmp(url: URL) =
+        withContext(Dispatchers.IO) {
+            return@withContext try {
+                BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            } catch (e : IOException) {
+                Log.d("bmp", e.toString())
+                null
+            }
+        }
 
     fun uploadImage(filePath: Uri?) {
         if (filePath != null) {

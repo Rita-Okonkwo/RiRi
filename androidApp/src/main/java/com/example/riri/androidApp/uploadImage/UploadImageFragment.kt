@@ -1,6 +1,7 @@
 package com.example.riri.androidApp.uploadImage
 
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.util.Log
@@ -158,7 +160,8 @@ class UploadImageFragment : Fragment() {
         if (urlString.isEmpty()) {
             viewModel.uploadImage(filePath)
         } else {
-            viewModel.uploadImageUrl(urlString)
+
+            viewModel.uploadImgUrl(urlString)
         }
     }
 
@@ -178,6 +181,39 @@ class UploadImageFragment : Fragment() {
             if (data == null || data.data == null) {
                 return
             }
+            val mimeType: String? = data.data?.let { returnUri ->
+                context?.contentResolver?.getType(returnUri)
+            }
+            var imageSize : Double? = null
+           data.data?.let { returnUri ->
+                context?.contentResolver?.query(returnUri, null, null, null, null)
+            }?.use { cursor ->
+                val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                cursor.moveToFirst()
+                imageSize = cursor.getDouble(sizeIndex)
+            }
+
+            if (imageSize == null) {
+                return
+            }
+            imageSize = imageSize!! / 1048576.toDouble()
+            
+
+            if (mimeType == null) {
+                Toast.makeText(context, "Please upload an image", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            if (imageSize!! > 4) {
+                Toast.makeText(context, "Please upload an image less than 4MB", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            if (mimeType != "image/jpeg" && mimeType != "image/png" && mimeType != "image/jpg") {
+                Toast.makeText(context, "Please upload an image", Toast.LENGTH_SHORT).show()
+                return
+            }
+
             filePath = data.data
             viewModel.setPic(requireContext(), filePath)
             val outputStream =
@@ -188,6 +224,8 @@ class UploadImageFragment : Fragment() {
                 outputStream
             )
             outputStream.close()
+
+
         }
     }
 
