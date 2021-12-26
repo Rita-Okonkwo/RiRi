@@ -14,4 +14,10 @@
     <string name="copy">Copy</string>
     <string name="share">Share</string>
     <string name="delete">Delete</string>
+    <string name="onboard_btn_txt">Let\'s Go\!</string>
+    <string name="onboard_text">Listen to texts read from images and save texts for later use. Easy way to understand images and texts.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save">Save</string>
+    <string name="enter_shareable_url">Enter shareable URL</string>
 </resources>

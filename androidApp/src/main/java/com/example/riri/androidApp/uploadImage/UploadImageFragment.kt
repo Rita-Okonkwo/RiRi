@@ -177,7 +177,6 @@ class UploadImageFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
-            binding.frame.visibility = View.GONE
             if (data == null || data.data == null) {
                 return
             }
@@ -213,7 +212,7 @@ class UploadImageFragment : Fragment() {
                 Toast.makeText(context, "Please upload an image", Toast.LENGTH_SHORT).show()
                 return
             }
-
+            binding.frame.visibility = View.GONE
             filePath = data.data
             viewModel.setPic(requireContext(), filePath)
             val outputStream =
