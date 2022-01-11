@@ -1,4 +1,4 @@
-package com.example.riri.androidApp.textList
+package com.tech.riri.androidApp.textList
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.riri.androidApp.R
-import com.example.riri.shared.data.models.TextObjectDataModel
+import com.tech.riri.androidApp.R
+import com.tech.riri.shared.data.models.TextObjectDataModel
 
 
 class TextListAdapter(private val onClick: (TextObjectDataModel, View) -> Unit) :

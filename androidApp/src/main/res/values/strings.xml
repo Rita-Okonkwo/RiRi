@@ -2,22 +2,38 @@
 <resources>
     <string name="hello">Hello</string>
     <string name="choose">choose</string>
-    <string name="upload">upload</string>
+    <string name="upload">Upload</string>
     <string name="play">Play</string>
     <string name="pause">Pause</string>
     <string name="stop">Stop</string>
-    <string name="upload_image">Upload Image</string>
+    <string name="upload_image">Upload</string>
     <string name="extracted_text_shows_here">Extracted text shows here</string>
     <string name="riri">RiRi</string>
-    <string name="play_text">Play text audio</string>
+    <string name="play_text">Play/Stop text audio</string>
     <string name="pause_text">Pause text audio</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
     <string name="delete">Delete</string>
     <string name="onboard_btn_txt">Let\'s Go\!</string>
     <string name="onboard_text">Listen to texts read from images and save texts for later use. Easy way to understand images and texts.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="save">Save</string>
     <string name="enter_shareable_url">Enter shareable URL</string>
+    <string name="an_illustration_of_a_lady_walking">An illustration of a lady walking</string>
+    <string name="welcome">Welcome!</string>
+    <string name="select_an_image_or_paste_an_image_link">Select an image or paste an image link</string>
+    <string name="select_image_text">Select image</string>
+    <string name="paste_link">Paste link</string>
+    <string name="an_image_showing_documents">An image showing documents</string>
+    <string name="bookmarks">Bookmarks</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="http">http://</string>
+    <string name="select_your_image">Select your Image</string>
+    <string name="view_saved_texts">View saved texts</string>
+    <string name="your_text_has_been_saved">Your text has been saved!</string>
+    <string name="an_image_of_someone_taking_notes">An image of someone taking notes</string>
+    <string name="a_close_icon_image">A close icon image</string>
+    <string name="play_stop_audio">Play/Stop audio</string>
+    <string name="play_and_stop_image_icon">Play and Stop image icon</string>
+    <string name="save_icon">Save icon</string>
 </resources>

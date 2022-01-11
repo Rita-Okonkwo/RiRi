@@ -6,22 +6,89 @@
     app:startDestination="@id/onboardingFragment">
 
     <fragment
-        android:id="@+id/uploadImageFragment"
-        android:name="com.example.riri.androidApp.uploadImage.UploadImageFragment"
-        android:label="upload_image_fragment"
-        tools:layout="@layout/upload_image_fragment" >
-        <action
-            android:id="@+id/action_uploadImageFragment_to_textListFragment"
-            app:destination="@id/textListFragment" />
+        android:id="@+id/textListFragment"
+        android:name="com.tech.riri.androidApp.textList.TextListFragment"
+        android:label="@string/riri"
+        tools:layout="@layout/text_list_fragment">
     </fragment>
     <fragment
-        android:id="@+id/textListFragment"
-        android:name="com.example.riri.androidApp.textList.TextListFragment"
-        android:label="text_list_fragment"
-        tools:layout="@layout/text_list_fragment" />
-    <fragment
         android:id="@+id/onboardingFragment"
-        android:name="com.example.riri.androidApp.onboarding.OnboardingFragment"
-        android:label="fragment_onboarding"
-        tools:layout="@layout/fragment_onboarding" />
+        android:name="com.tech.riri.androidApp.onboarding.OnboardingFragment"
+        android:label="@string/riri"
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_onboardingFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.tech.riri.androidApp.welcome.WelcomeFragment"
+        android:label="@string/riri"
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcomeFragment_to_textListFragment"
+            app:destination="@id/textListFragment"
+            app:popUpTo="@id/onboardingFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_uploadImageFragment"
+            app:destination="@id/uploadImageFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_pasteLinkFragment"
+            app:destination="@id/pasteLinkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/uploadImageFragment"
+        android:name="com.tech.riri.androidApp.uploadImage.UploadImageFragment"
+        android:label="@string/riri"
+        tools:layout="@layout/upload_image_fragment">
+        <action
+            android:id="@+id/action_uploadImageFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+        <action
+            android:id="@+id/action_uploadImageFragment_to_textListFragment"
+            app:destination="@id/textListFragment"
+            app:popUpTo="@id/onboardingFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/pasteLinkFragment"
+        android:name="com.tech.riri.androidApp.uploadImage.PasteLinkFragment"
+        android:label="@string/riri"
+        tools:layout="@layout/fragment_paste_link">
+        <action
+            android:id="@+id/action_pasteLinkFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+        <action
+            android:id="@+id/action_pasteLinkFragment_to_textListFragment"
+            app:destination="@id/textListFragment"
+            app:popUpTo="@id/onboardingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.tech.riri.androidApp.uploadImage.ResultFragment"
+        android:label="@string/riri"
+        tools:layout="@layout/fragment_result">
+        <argument
+            android:name="result_text"
+            android:defaultValue="null"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_resultFragment_to_textListFragment"
+            app:destination="@id/textListFragment"
+            app:popUpTo="@id/onboardingFragment" />
+        <action
+            android:id="@+id/action_resultFragment_to_myDialog"
+            app:destination="@id/myDialog"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <dialog
+        android:id="@+id/myDialog"
+        android:name="com.tech.riri.androidApp.uploadImage.MyDialog"
+        android:label="my_dialog"
+        tools:layout="@layout/my_dialog" >
+        <action
+            android:id="@+id/action_myDialog_to_textListFragment"
+            app:destination="@id/textListFragment"
+            app:popUpTo="@id/onboardingFragment" />
+    </dialog>
 </navigation>

@@ -1,32 +1,25 @@
-package com.example.riri.androidApp.uploadImage
+package com.tech.riri.androidApp.uploadImage
 
 import android.app.Activity
-import android.content.ContentResolver
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.speech.tts.TextToSpeech
-import android.speech.tts.UtteranceProgressListener
-import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
-import com.example.riri.androidApp.R
-import com.example.riri.androidApp.databinding.UploadImageFragmentBinding
+import com.tech.riri.androidApp.R
+import com.tech.riri.androidApp.databinding.UploadImageFragmentBinding
 import java.io.FileOutputStream
 import java.util.*
-import java.util.jar.Manifest
 
 class UploadImageFragment : Fragment() {
     private var _binding: UploadImageFragmentBinding? = null
@@ -34,20 +27,20 @@ class UploadImageFragment : Fragment() {
     private val PICK_IMAGE = 50
     private var filePath: Uri? = null
     private lateinit var viewModel: UploadImageViewModel
-    private lateinit var tts: TextToSpeech
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         _binding = UploadImageFragmentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
             .create(UploadImageViewModel::class.java)
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view : View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.status.observe(viewLifecycleOwner, { status ->
             if (status == "loading") {
                 binding.progressBar.visibility = View.VISIBLE
@@ -59,8 +52,10 @@ class UploadImageFragment : Fragment() {
             }
         })
 
-        viewModel.text.observe(viewLifecycleOwner, { text ->
-            binding.extractedtext.text = text
+      viewModel.text.observe(viewLifecycleOwner, { text ->
+            if (text != null) {
+                findNavController().navigate(UploadImageFragmentDirections.actionUploadImageFragmentToResultFragment(text))
+            }
         })
 
         binding.frame.setOnClickListener {
@@ -71,8 +66,12 @@ class UploadImageFragment : Fragment() {
             }
         }
 
-        binding.selectBtn.setOnClickListener {
-            uploadImage()
+       binding.selectBtn.setOnClickListener {
+           if (binding.image.drawable != null) {
+               uploadImage()
+           } else {
+               Toast.makeText(context, "Please select an image", Toast.LENGTH_LONG).show()
+           }
         }
 
         viewModel.imageStatus.observe(viewLifecycleOwner, { imageStatus ->
@@ -84,37 +83,6 @@ class UploadImageFragment : Fragment() {
         viewModel.image.observe(viewLifecycleOwner, { image ->
             binding.image.setImageBitmap(image)
         })
-
-        tts = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                tts.language = Locale.UK
-                tts.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
-                    override fun onStart(utteranceId: String) {
-                        Log.i("TextToSpeech", "On Start")
-                    }
-
-                    override fun onDone(utteranceId: String) {
-                        Log.i("TextToSpeech", "On Done")
-                        requireActivity().runOnUiThread {
-                            binding.playandstop.setImageResource(R.drawable.play)
-                        }
-                    }
-
-                    override fun onError(utteranceId: String) {
-                        Log.i("TextToSpeech", "On Error")
-                    }
-                })
-            }
-        }
-
-        binding.playandstop.setOnClickListener {
-            playAndStop()
-        }
-
-        binding.save.setOnClickListener {
-            viewModel.saveText(binding.extractedtext.text.toString())
-            findNavController().navigate(R.id.action_uploadImageFragment_to_textListFragment)
-        }
 
     }
 
@@ -138,31 +106,9 @@ class UploadImageFragment : Fragment() {
         }
     }
 
-    private fun playAndStop() {
-        val toSpeak = binding.extractedtext.text.toString()
-        if (toSpeak == "") {
-            Toast.makeText(context, "No text", Toast.LENGTH_SHORT).show()
-        } else if (tts.isSpeaking && binding.playandstop.tag == getString(R.string.stop)) {
-            binding.playandstop.setImageResource(R.drawable.play)
-            binding.playandstop.tag = getString(R.string.play)
-            tts.stop()
-        } else {
-            binding.playandstop.setImageResource(R.drawable.stop)
-            binding.playandstop.tag = getString(R.string.stop)
-            tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "audiotext")
-        }
-    }
 
-    private fun uploadImage() {
-        Log.d("uri", filePath.toString())
-        val urlString = binding.url.text.toString()
-        Log.d("edit", urlString)
-        if (urlString.isEmpty()) {
-            viewModel.uploadImage(filePath)
-        } else {
-
-            viewModel.uploadImgUrl(urlString)
-        }
+   private fun uploadImage() {
+       viewModel.uploadImage(filePath)
     }
 
     private fun launchGallery() {
@@ -212,7 +158,7 @@ class UploadImageFragment : Fragment() {
                 Toast.makeText(context, "Please upload an image", Toast.LENGTH_SHORT).show()
                 return
             }
-            binding.frame.visibility = View.GONE
+            binding.addImage.visibility = View.GONE
             filePath = data.data
             viewModel.setPic(requireContext(), filePath)
             val outputStream =
@@ -224,7 +170,26 @@ class UploadImageFragment : Fragment() {
             )
             outputStream.close()
 
+            binding.selectText.text = "Change image"
+            binding.selectText.setTextColor(Color.parseColor("#FEFEE3"))
 
+            binding.gradient.visibility = View.VISIBLE
+
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.action_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId)  {
+            R.id.bookmarks -> {
+                findNavController().navigate(R.id.action_uploadImageFragment_to_textListFragment)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

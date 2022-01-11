@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboard_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FEFEE3"
+    tools:context=".onboarding.OnboardingFragment">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/onboard_bkgrnd"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FEFEE3"
+    tools:context=".onboarding.OnboardingFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="415dp"
+        android:layout_height="218dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/an_illustration_of_a_lady_walking"
+        android:src="@drawable/onboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/onboard_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="438dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/raleway"
+        android:padding="8dp"
+        android:text="@string/onboard_text"
+        android:textAlignment="center"
+        android:textColor="#444053"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/onboard_btn"
+        android:layout_width="148dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="515dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_corner"
+        android:text="@string/onboard_btn_txt"
+        android:textAllCaps="false"
+        android:textColor="#FEFEE3"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

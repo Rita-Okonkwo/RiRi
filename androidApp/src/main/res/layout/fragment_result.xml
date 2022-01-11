@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/result_constraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FEFEE3"
+    tools:context=".uploadImage.ResultFragment">
+
+    <ScrollView
+        android:id="@+id/result_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FEFEE3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".welcome.WelcomeFragment">
+
+        <LinearLayout
+            android:id="@+id/result_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FEFEE3"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/result_frame"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="43dp"
+                android:layout_marginTop="75dp"
+                android:layout_marginEnd="43dp">
+
+                <ImageView
+                    android:id="@+id/result_bkgrnd_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.2"
+                    android:background="#2C6E49"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:id="@+id/text_scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="72dp"
+                    android:layout_marginBottom="10dp"
+                    android:fillViewport="true"
+                    android:scrollbars="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/result_bkgrnd_img"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/result_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/raleway"
+                        android:padding="4dp"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                </ScrollView>
+
+                <ImageView
+                    android:id="@+id/result_save_img"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:src="@drawable/bookmark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/save_icon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/playandstop"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="117dp"
+                android:layout_marginTop="54dp"
+                android:layout_marginEnd="117dp"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/play"
+                android:contentDescription="@string/play_and_stop_image_icon" />
+
+            <TextView
+                android:id="@+id/playandstoptext"
+                android:layout_width="181dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="117dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="117dp"
+                android:fontFamily="@font/raleway"
+                android:text="@string/play_stop_audio"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/background_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/an_image_showing_documents"
+        android:src="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
