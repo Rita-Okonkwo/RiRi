@@ -36,6 +36,7 @@
                 android:fontFamily="@font/raleway"
                 android:hint="@string/http"
                 android:padding="4dp"
+                android:singleLine="true"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 android:textColor="#2C6E49"
@@ -74,9 +75,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="570dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/an_image_showing_documents"
         android:cropToPadding="false"
@@ -84,6 +84,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/paste_scroll" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

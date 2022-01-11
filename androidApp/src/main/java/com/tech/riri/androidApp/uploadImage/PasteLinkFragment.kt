@@ -55,7 +55,7 @@ class PasteLinkFragment : Fragment() {
                 binding.progressBar3.visibility = View.GONE
             }
             if (status == "fn") {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Check internet connectivity and try again", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -85,6 +85,8 @@ class PasteLinkFragment : Fragment() {
                 } else {
                     viewModel.uploadImgUrl(urlString)
                 }
+            } else {
+                Toast.makeText(context, "Please check internet connection and try again", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -93,11 +95,16 @@ class PasteLinkFragment : Fragment() {
         withContext(Dispatchers.IO) {
             return@withContext try {
                 saveImage(
-                    Glide.with(requireActivity().applicationContext)
-                        .asBitmap()
-                        .load(urlString)
-                        .submit()
-                        .get()
+                    try {
+                        Glide.with(requireActivity().applicationContext)
+                            .asBitmap()
+                            .load(urlString)
+                            .submit()
+                            .get()
+                    } catch (e : Exception){
+                        null
+                    }
+
                 )
             } catch (e : IOException) {
                 Log.d("bmp", e.toString())
@@ -105,9 +112,12 @@ class PasteLinkFragment : Fragment() {
             }
         }
 
-    private fun saveImage(get: Bitmap?) : Double {
-        val imageSize  = get?.let { BitmapCompat.getAllocationByteCount(it) }
-        return imageSize!! / 1048576.toDouble()
+    private fun saveImage(get: Bitmap?) : Double? {
+        if (get != null){
+            val imageSize  = get.let { BitmapCompat.getAllocationByteCount(it) }
+            return imageSize / 1048576.toDouble()
+        }
+        return null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
