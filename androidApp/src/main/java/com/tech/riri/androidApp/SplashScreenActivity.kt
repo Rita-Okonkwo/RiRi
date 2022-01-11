@@ -1,4 +1,4 @@
-package com.example.riri.androidApp
+package com.tech.riri.androidApp
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

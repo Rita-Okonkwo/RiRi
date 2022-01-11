@@ -1,4 +1,4 @@
-package com.example.riri.androidApp
+package com.tech.riri.androidApp
 
 
 import android.view.View

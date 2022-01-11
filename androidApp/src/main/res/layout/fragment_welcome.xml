@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/welcome_constraint"
+    android:layout_height="match_parent"
+    android:background="#FEFEE3"
+    tools:context=".welcome.WelcomeFragment">
+
+    <ScrollView
+        android:id="@+id/welcome_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FEFEE3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".welcome.WelcomeFragment">
+
+        <LinearLayout
+            android:id="@+id/welcome_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FEFEE3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/welcome_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="163dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/raleway"
+                android:text="@string/welcome"
+                android:textAlignment="center"
+                android:textColor="#444053"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/welcome_select_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway"
+                android:text="@string/select_an_image_or_paste_an_image_link"
+                android:textAlignment="center"
+                android:textColor="#444053"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/welcome_select_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="89dp"
+                android:layout_marginEnd="75dp"
+                android:background="@drawable/transparent_rounded_corner"
+                android:fontFamily="@font/raleway"
+                android:text="@string/select_image_text"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textColor="#2C6E49"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/welcome_paste_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="43dp"
+                android:layout_marginEnd="75dp"
+                android:background="@drawable/transparent_rounded_corner"
+                android:fontFamily="@font/raleway"
+                android:text="@string/paste_link"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textColor="#2C6E49"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/background_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/an_image_showing_documents" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

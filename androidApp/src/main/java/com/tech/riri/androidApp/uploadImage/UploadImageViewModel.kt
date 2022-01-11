@@ -1,4 +1,4 @@
-package com.example.riri.androidApp.uploadImage
+package com.tech.riri.androidApp.uploadImage
 
 import android.app.Application
 import android.content.Context
@@ -11,11 +11,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.riri.shared.cache.TextObjectDatabaseDriverFactory
-import com.example.riri.shared.data.TextObjectRepository
-import com.example.riri.shared.data.local.TextSqlDelightDatabase
-import com.example.riri.shared.data.remote.RiRiApi
-import com.example.riri.shared.entity.Image
+import com.tech.riri.shared.cache.TextObjectDatabaseDriverFactory
+import com.tech.riri.shared.data.TextObjectRepository
+import com.tech.riri.shared.data.local.TextSqlDelightDatabase
+import com.tech.riri.shared.data.remote.RiRiApi
+import com.tech.riri.shared.entity.Image
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.*
@@ -49,8 +49,8 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
     val imageStatus: LiveData<String>
         get() = _imageStatus
 
-    private val _text = MutableLiveData<String>()
-    val text: LiveData<String>
+    private val _text = MutableLiveData<String?>()
+    val text: LiveData<String?>
         get() = _text
 
     val sb = StringBuilder()
@@ -66,7 +66,7 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
                 if (it.status == "succeeded") {
                     _status.value = "done"
                     if (it.analyzeResult != null && it.analyzeResult?.readResults?.get(0)?.lines?.isEmpty()!!) {
-                        _text.value = "No text in image"
+                        _text.value = null
                     } else {
                         _text.value = extractText(it)
                     }

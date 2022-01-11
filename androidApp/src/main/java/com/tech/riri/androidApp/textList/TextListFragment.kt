@@ -1,4 +1,4 @@
-package com.example.riri.androidApp.textList
+package com.tech.riri.androidApp.textList
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -16,10 +16,9 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
-import com.example.riri.androidApp.R
-import com.example.riri.androidApp.databinding.TextListFragmentBinding
-import com.example.riri.shared.data.models.TextObjectDataModel
+import com.tech.riri.androidApp.R
+import com.tech.riri.androidApp.databinding.TextListFragmentBinding
+import com.tech.riri.shared.data.models.TextObjectDataModel
 import java.util.*
 
 
@@ -37,17 +36,17 @@ class TextListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
+    //    ((AppCompatActivity)getActivity()).getSupportActionBar().hide()
         _binding = TextListFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view : View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
             .create(TextListViewModel::class.java)
-        adapter = TextListAdapter { text, view ->
-            textListOnClick(text, view)
+        adapter = TextListAdapter { text, textView ->
+            textListOnClick(text, textView)
         }
         binding.listRV.adapter = adapter
         getTextList()
@@ -148,6 +147,9 @@ class TextListFragment : Fragment() {
 
     private fun getTextList() {
         textList = viewModel.getTextList() as ArrayList<TextObjectDataModel>
+        if (textList.isNotEmpty()) {
+            binding.noSavedTexts.visibility = View.GONE
+        }
         adapter.submitList(textList)
     }
 
