@@ -44,6 +44,7 @@ class ResultFragment : Fragment() {
         binding.resultSaveImg.setOnClickListener {
             viewModel.saveText(binding.resultText.text.toString())
             findNavController().navigate(R.id.action_resultFragment_to_myDialog)
+            binding.resultSaveImg.visibility = View.INVISIBLE
         }
 
         tts = TextToSpeech(context) { status ->

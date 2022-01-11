@@ -49,6 +49,7 @@ class UploadImageFragment : Fragment() {
             }
             if (status == "fn") {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                binding.selectBtn.isEnabled = true
             }
         })
 
@@ -69,6 +70,8 @@ class UploadImageFragment : Fragment() {
        binding.selectBtn.setOnClickListener {
            if (binding.image.drawable != null) {
                uploadImage()
+               Toast.makeText(context, "Processing image", Toast.LENGTH_LONG).show()
+               binding.selectBtn.isEnabled = false
            } else {
                Toast.makeText(context, "Please select an image", Toast.LENGTH_LONG).show()
            }

@@ -13,6 +13,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,12 +23,13 @@
 
     <TextView
         android:id="@+id/audio_text"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="32dp"
         android:fontFamily="@font/raleway"
+        android:padding="4dp"
         android:text="@string/play"
         android:textColor="#000000"
         android:textSize="14sp"
