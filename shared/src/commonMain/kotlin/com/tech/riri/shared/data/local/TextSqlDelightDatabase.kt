@@ -1,8 +1,8 @@
-package com.example.riri.shared.data.local
+package com.tech.riri.shared.data.local
 
-import com.example.riri.shared.cache.TextObjectDatabaseDriverFactory
-import com.example.riri.shared.cache.TextObjectSqlDelightDatabase
-import com.example.riri.shared.data.models.TextObjectDatabaseModel
+import com.tech.riri.shared.cache.TextObjectDatabaseDriverFactory
+import com.tech.riri.shared.cache.TextObjectSqlDelightDatabase
+import com.tech.riri.shared.data.models.TextObjectDatabaseModel
 
 class TextSqlDelightDatabase(textObjectDatabaseDriverFactory: TextObjectDatabaseDriverFactory) :
     TextObjectInterface {

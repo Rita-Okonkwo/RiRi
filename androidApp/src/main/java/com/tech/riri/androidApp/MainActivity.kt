@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             if (destination.id == R.id.onboardingFragment) {
                 supportActionBar?.hide()
             } else if ( destination.id == R.id.textListFragment) {
-                supportActionBar?.hide()
+                supportActionBar?.show()
             } else if ( destination.id == R.id.welcomeFragment) {
                 supportActionBar?.show()
             } else if (destination.id == R.id.uploadImageFragment) {

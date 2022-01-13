@@ -1,7 +1,7 @@
-package com.example.riri.shared.data
+package com.tech.riri.shared.data
 
-import com.example.riri.shared.data.local.TextObjectInterface
-import com.example.riri.shared.data.models.TextObjectDataModel
+import com.tech.riri.shared.data.local.TextObjectInterface
+import com.tech.riri.shared.data.models.TextObjectDataModel
 
 
 class TextObjectRepository(val database: TextObjectInterface) {

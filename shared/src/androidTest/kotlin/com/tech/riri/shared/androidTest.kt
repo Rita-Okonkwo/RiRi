@@ -1,4 +1,4 @@
-package com.example.riri.shared
+package com.tech.riri.shared
 
 import org.junit.Assert.assertTrue
 import org.junit.Test

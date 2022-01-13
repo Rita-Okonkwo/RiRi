@@ -8,7 +8,7 @@ plugins {
 
 }
 
-group = "com.example.riri"
+group = "com.tech.riri"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -106,6 +106,6 @@ tasks.getByName("build").dependsOn(packForXcode)
 
 sqldelight {
     database("TextObjectSqlDelightDatabase") {
-        packageName = "com.example.riri.shared.cache"
+        packageName = "com.tech.riri.shared.cache"
     }
 }

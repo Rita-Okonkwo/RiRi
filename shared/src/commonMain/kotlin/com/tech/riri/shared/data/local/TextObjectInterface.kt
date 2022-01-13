@@ -1,6 +1,6 @@
-package com.example.riri.shared.data.local
+package com.tech.riri.shared.data.local
 
-import com.example.riri.shared.data.models.TextObjectDatabaseModel
+import com.tech.riri.shared.data.models.TextObjectDatabaseModel
 
 interface TextObjectInterface {
     fun addText(text: String)

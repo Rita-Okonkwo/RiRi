@@ -7,14 +7,14 @@ plugins {
 
 }
 
-group = "com.example.riri"
+group = "com.tech.riri"
 version = "1.0-SNAPSHOT"
 
 repositories {
     gradlePluginPortal()
+    mavenCentral()
     google()
     jcenter()
-    mavenCentral()
 }
 
 dependencies {
@@ -35,14 +35,17 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation("androidx.core:core-splashscreen:1.0.0-alpha01")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0-alpha05")
     androidTestImplementation("androidx.test:rules:1.3.0-beta01")
+    implementation("com.github.bumptech.glide:glide:4.11.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
 }
 
 android {
     compileSdkVersion(31)
     defaultConfig {
-        applicationId = "com.example.riri.androidApp"
+        applicationId = "com.tech.riri.androidApp"
         minSdkVersion(21)
         targetSdkVersion(31)
         versionCode = 1

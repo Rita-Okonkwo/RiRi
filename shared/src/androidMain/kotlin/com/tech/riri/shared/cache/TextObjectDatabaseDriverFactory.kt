@@ -1,4 +1,4 @@
-package com.example.riri.shared.cache
+package com.tech.riri.shared.cache
 
 import android.content.Context
 import com.squareup.sqldelight.android.AndroidSqliteDriver

@@ -17,7 +17,7 @@ buildscript {
     }
 }
 
-group = "com.example.riri"
+group = "com.tech.riri"
 version = "1.0-SNAPSHOT"
 
 allprojects {

@@ -1,7 +1,7 @@
-package com.example.riri.shared.data.remote
+package com.tech.riri.shared.data.remote
 
-import com.example.riri.shared.entity.Image
-import com.example.riri.shared.entity.Url
+import com.tech.riri.shared.entity.Image
+import com.tech.riri.shared.entity.Url
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer

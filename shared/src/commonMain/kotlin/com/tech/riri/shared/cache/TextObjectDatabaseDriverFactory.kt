@@ -1,4 +1,4 @@
-package com.example.riri.shared.cache
+package com.tech.riri.shared.cache
 
 import com.squareup.sqldelight.db.SqlDriver
 

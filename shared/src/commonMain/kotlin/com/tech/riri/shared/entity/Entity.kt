@@ -1,4 +1,4 @@
-package com.example.riri.shared.entity
+package com.tech.riri.shared.entity
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

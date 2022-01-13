@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.riri.shared">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.tech.riri.shared">
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

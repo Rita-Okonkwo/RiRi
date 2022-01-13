@@ -1,4 +1,4 @@
-package com.example.riri.shared
+package com.tech.riri.shared
 
 import kotlin.test.Test
 import kotlin.test.assertTrue

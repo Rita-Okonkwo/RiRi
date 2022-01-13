@@ -48,7 +48,7 @@ class UploadImageFragment : Fragment() {
                 binding.progressBar.visibility = View.GONE
             }
             if (status == "fn") {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Please check your internet connection and try again", Toast.LENGTH_SHORT).show()
                 binding.selectBtn.isEnabled = true
             }
         })
@@ -69,8 +69,8 @@ class UploadImageFragment : Fragment() {
 
        binding.selectBtn.setOnClickListener {
            if (binding.image.drawable != null) {
+               binding.progressBar.visibility = View.VISIBLE
                uploadImage()
-               Toast.makeText(context, "Processing image", Toast.LENGTH_LONG).show()
                binding.selectBtn.isEnabled = false
            } else {
                Toast.makeText(context, "Please select an image", Toast.LENGTH_LONG).show()
