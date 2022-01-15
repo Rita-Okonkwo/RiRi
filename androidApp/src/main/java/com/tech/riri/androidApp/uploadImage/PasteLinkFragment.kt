@@ -86,7 +86,7 @@ class PasteLinkFragment : Fragment() {
                     viewModel.uploadImgUrl(urlString)
                 }
             } else {
-                Toast.makeText(context, "Please check internet connection and try again", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Please paste a valid image link", Toast.LENGTH_LONG).show()
             }
         }
     }

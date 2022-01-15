@@ -17,6 +17,7 @@ import com.tech.riri.shared.data.local.TextSqlDelightDatabase
 import com.tech.riri.shared.data.remote.RiRiApi
 import com.tech.riri.shared.entity.Image
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.*
 import java.io.File
@@ -55,6 +56,8 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
 
     val sb = StringBuilder()
 
+    private var tempImageRef: StorageReference? = null
+
 
     fun retrieveImageResponse() {
         viewModelScope.launch {
@@ -66,9 +69,10 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
                 if (it.status == "succeeded") {
                     _status.value = "done"
                     if (it.analyzeResult != null && it.analyzeResult?.readResults?.get(0)?.lines?.isEmpty()!!) {
-                        _text.value = null
+                        _text.value = "No text found in image"
                     } else {
                         _text.value = extractText(it)
+                        tempImageRef?.delete()
                     }
                     println(_text.value)
 
@@ -79,8 +83,11 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
                 }
             }.onFailure {
                 _status.value = "fn"
+                println(it.message)
+                Log.d("azure", it.message.toString())
             }
         }
+
     }
 
     fun uploadImgUrl(url: String) {
@@ -110,6 +117,7 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
     fun uploadImage(filePath: Uri?) {
         if (filePath != null) {
             val ref = storageReference.child("uploads/" + UUID.randomUUID().toString())
+            tempImageRef = ref
             val uploadTask = ref.putFile(filePath)
 
             val urlTask = uploadTask.continueWithTask { task ->

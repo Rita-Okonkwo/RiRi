@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+/androidApp/build
+/shared/build
+/androidApp/google-services.json
+/androidApp/release
