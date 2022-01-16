@@ -95,7 +95,7 @@
     <Button
         android:id="@+id/select_btn"
         android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:layout_marginStart="75dp"
         android:layout_marginTop="450dp"
         android:layout_marginEnd="75dp"

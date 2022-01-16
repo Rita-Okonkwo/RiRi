@@ -28,7 +28,7 @@
             <EditText
                 android:id="@+id/paste_link"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="75dp"
                 android:layout_marginTop="250dp"
                 android:layout_marginEnd="75dp"
@@ -45,7 +45,7 @@
             <Button
                 android:id="@+id/paste_upload_btn"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="75dp"
                 android:layout_marginTop="43dp"
                 android:layout_marginEnd="75dp"

@@ -20,21 +20,21 @@ class RiRiApi {
         }
     }
 
-    private suspend fun sendImage(url: String): HttpResponse {
-        return httpClient.post(IMAGE_ENDPOINT) {
+    private suspend fun sendImage(url: String, apiKey: String, imageEndpoint: String, contentType: String): HttpResponse {
+        return httpClient.post(imageEndpoint) {
             headers {
-                append("Content-Type", CONTENT_TYPE)
-                append("Ocp-Apim-Subscription-Key", OCP_APIM)
+                append("Content-Type", contentType)
+                append("Ocp-Apim-Subscription-Key", apiKey)
             }
             body = Url(url)
         }
     }
 
-    suspend fun getResponse(): Image {
+    suspend fun getResponse(apiKey: String, imageEndpoint: String, contentType: String): Image {
         if (operationLocationUrl == "") {
             kotlin.runCatching {
                 print(imageUrl)
-                sendImage(imageUrl)
+                sendImage(imageUrl, apiKey, imageEndpoint, contentType)
             }.onSuccess {
                 operationLocationUrl = it.headers.get("Operation-Location")
                 println(operationLocationUrl)
@@ -43,24 +43,17 @@ class RiRiApi {
                 print(it.message)
             }
         }
-        return retrieveImageResponse(operationLocationUrl)
+        return retrieveImageResponse(operationLocationUrl, apiKey, imageEndpoint, contentType)
     }
 
-    suspend fun retrieveImageResponse(url: String?): Image {
+    private suspend fun retrieveImageResponse(url: String?, apiKey: String, imageEndpoint: String, contentType: String ): Image {
         return httpClient.get(url!!) {
             headers {
-                append("Content-Type", CONTENT_TYPE)
-                append("Ocp-Apim-Subscription-Key", OCP_APIM)
+                append("Content-Type", contentType)
+                append("Ocp-Apim-Subscription-Key", apiKey)
             }
             contentType(ContentType.Application.Json)
         }
-    }
-
-    companion object {
-        private const val IMAGE_ENDPOINT =
-            "https://ririvision.cognitiveservices.azure.com/vision/v3.1/read/analyze/"
-        private const val CONTENT_TYPE = "application/json"
-        private const val OCP_APIM = "80d2b8c43b52442fad01d26a99e63ce7"
     }
 }
 

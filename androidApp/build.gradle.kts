@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -52,9 +54,20 @@ android {
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    val prop = Properties()
+    prop.load(project.rootProject.file("local.properties").inputStream())
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
+            buildConfigField("String", "API_KEY", prop.getProperty("API_KEY"))
+            buildConfigField("String", "IMAGE_ENDPOINT", prop.getProperty("IMAGE_ENDPOINT"))
+            buildConfigField("String", "CONTENT_TYPE", prop.getProperty("CONTENT_TYPE"))
+        }
+        getByName("debug") {
+            isMinifyEnabled = false
+            buildConfigField("String", "API_KEY", prop.getProperty("API_KEY"))
+            buildConfigField("String", "IMAGE_ENDPOINT", prop.getProperty("IMAGE_ENDPOINT"))
+            buildConfigField("String", "CONTENT_TYPE", prop.getProperty("CONTENT_TYPE"))
         }
     }
 
@@ -66,4 +79,7 @@ android {
     buildFeatures {
         viewBinding =true
     }
+
+
+
 }

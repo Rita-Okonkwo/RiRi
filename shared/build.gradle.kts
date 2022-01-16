@@ -5,7 +5,6 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("com.squareup.sqldelight")
-
 }
 
 group = "com.tech.riri"
@@ -71,6 +70,7 @@ kotlin {
     }
 }
 
+
 android {
     compileSdkVersion(31)
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -80,6 +80,9 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+
+
+
 
     buildTypes {
         getByName("release") {

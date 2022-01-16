@@ -11,6 +11,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.tech.riri.androidApp.BuildConfig
 import com.tech.riri.shared.cache.TextObjectDatabaseDriverFactory
 import com.tech.riri.shared.data.TextObjectRepository
 import com.tech.riri.shared.data.local.TextSqlDelightDatabase
@@ -63,7 +64,7 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
         viewModelScope.launch {
             kotlin.runCatching {
                 _status.value = "loading"
-                api.getResponse()
+                api.getResponse(BuildConfig.API_KEY, BuildConfig.IMAGE_ENDPOINT, BuildConfig.CONTENT_TYPE)
             }.onSuccess {
                 Log.d("test", it.toString())
                 if (it.status == "succeeded") {
