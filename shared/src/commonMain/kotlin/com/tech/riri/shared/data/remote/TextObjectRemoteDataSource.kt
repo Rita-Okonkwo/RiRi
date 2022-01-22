@@ -1,5 +1,7 @@
 package com.tech.riri.shared.data.remote
 
+import com.tech.riri.shared.data.local.TextObjectInterface
+import com.tech.riri.shared.data.models.TextObjectDatabaseModel
 import com.tech.riri.shared.entity.Image
 import com.tech.riri.shared.entity.Url
 import io.ktor.client.HttpClient
@@ -10,9 +12,9 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.*
 
 
-class RiRiApi {
+class TextObjectRemoteDataSource : TextObjectInterface {
     var operationLocationUrl: String? = ""
-    var imageUrl = ""
+    private var imageUrl = ""
     private val httpClient = HttpClient {
         install(JsonFeature) {
             val json = kotlinx.serialization.json.Json { ignoreUnknownKeys = true }
@@ -30,7 +32,20 @@ class RiRiApi {
         }
     }
 
-    suspend fun getResponse(apiKey: String, imageEndpoint: String, contentType: String): Image {
+    override suspend fun addText(text: String) {
+        //not required
+    }
+
+    override suspend fun deleteText(id: Long) {
+        //not required
+    }
+
+    override suspend fun getTexts(): List<TextObjectDatabaseModel> {
+        //not required
+        return emptyList()
+    }
+
+    override suspend fun getResponse(apiKey: String, imageEndpoint: String, contentType: String): Image {
         if (operationLocationUrl == "") {
             kotlin.runCatching {
                 print(imageUrl)
@@ -54,6 +69,10 @@ class RiRiApi {
             }
             contentType(ContentType.Application.Json)
         }
+    }
+
+    override fun changeUrl(url: String) {
+        imageUrl = url
     }
 }
 

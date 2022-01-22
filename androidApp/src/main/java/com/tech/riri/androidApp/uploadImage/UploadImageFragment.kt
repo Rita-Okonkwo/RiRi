@@ -15,9 +15,15 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.tech.riri.androidApp.R
 import com.tech.riri.androidApp.databinding.UploadImageFragmentBinding
+import com.tech.riri.shared.cache.TextObjectDatabaseDriverFactory
+import com.tech.riri.shared.data.TextObjectRepository
+import com.tech.riri.shared.data.local.TextObjectLocalDataSource
+import com.tech.riri.shared.data.remote.TextObjectRemoteDataSource
+import kotlinx.coroutines.Dispatchers
 import java.io.FileOutputStream
 import java.util.*
 
@@ -26,7 +32,11 @@ class UploadImageFragment : Fragment() {
     private val binding get() = _binding!!
     private val PICK_IMAGE = 50
     private var filePath: Uri? = null
-    private lateinit var viewModel: UploadImageViewModel
+    private val viewModel by viewModels<UploadImageViewModel> {
+        UploadImageViewModelFactory( TextObjectRepository(TextObjectRemoteDataSource(), TextObjectLocalDataSource(
+            TextObjectDatabaseDriverFactory(requireActivity().applicationContext)
+        )), Dispatchers.IO)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +44,6 @@ class UploadImageFragment : Fragment() {
     ): View {
         setHasOptionsMenu(true)
         _binding = UploadImageFragmentBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-            .create(UploadImageViewModel::class.java)
         return binding.root
     }
 

@@ -8,12 +8,18 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tech.riri.androidApp.R
 import com.tech.riri.androidApp.databinding.FragmentPasteLinkBinding
 import com.tech.riri.androidApp.databinding.FragmentResultBinding
+import com.tech.riri.shared.cache.TextObjectDatabaseDriverFactory
+import com.tech.riri.shared.data.TextObjectRepository
+import com.tech.riri.shared.data.local.TextObjectLocalDataSource
+import com.tech.riri.shared.data.remote.TextObjectRemoteDataSource
+import kotlinx.coroutines.Dispatchers
 import java.util.*
 
 
@@ -21,7 +27,13 @@ class ResultFragment : Fragment() {
 
     private var _binding: FragmentResultBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: UploadImageViewModel
+    private val viewModel by viewModels<UploadImageViewModel> {
+        UploadImageViewModelFactory( TextObjectRepository(
+            TextObjectRemoteDataSource(), TextObjectLocalDataSource(
+            TextObjectDatabaseDriverFactory(requireActivity().applicationContext)
+        )
+        ), Dispatchers.IO)
+    }
     private val args : ResultFragmentArgs by navArgs()
     private lateinit var tts: TextToSpeech
 
@@ -32,8 +44,6 @@ class ResultFragment : Fragment() {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
         _binding = FragmentResultBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-            .create(UploadImageViewModel::class.java)
         return binding.root
     }
 

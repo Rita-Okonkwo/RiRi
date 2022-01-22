@@ -38,8 +38,21 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation("androidx.core:core-splashscreen:1.0.0-alpha01")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0-alpha05")
-    androidTestImplementation("androidx.test:rules:1.3.0-beta01")
+
+    // Dependencies for local unit tests
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.hamcrest:hamcrest-all:1.3")
+    testImplementation("androidx.test:core-ktx:1.4.0")
+    testImplementation("org.robolectric:robolectric:4.3.1")
+    testImplementation("androidx.test.ext:junit-ktx:1.1.3")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+
+
+    // AndroidX Test - Instrumented testing
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0-alpha03")
+
     implementation("com.github.bumptech.glide:glide:4.11.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
 }
@@ -50,8 +63,8 @@ android {
         applicationId = "com.tech.riri.androidApp"
         minSdkVersion(21)
         targetSdkVersion(31)
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "3.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     val prop = Properties()
@@ -80,6 +93,8 @@ android {
         viewBinding =true
     }
 
-
+    testOptions.unitTests {
+        isIncludeAndroidResources = true
+    }
 
 }

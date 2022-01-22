@@ -1,24 +1,34 @@
 package com.tech.riri.shared.data
 
 import com.tech.riri.shared.data.local.TextObjectInterface
+import com.tech.riri.shared.data.local.TextObjectLocalDataSource
 import com.tech.riri.shared.data.models.TextObjectDataModel
+import com.tech.riri.shared.data.remote.TextObjectRemoteDataSource
+import com.tech.riri.shared.entity.Image
 
 
-class TextObjectRepository(val database: TextObjectInterface) {
+class TextObjectRepository(private val remoteDataSource: TextObjectInterface, private val localDataSource: TextObjectInterface) {
 
-
-    fun addText(text: String) {
-        database.addText(text)
+    suspend fun addText(text: String) {
+        localDataSource.addText(text)
     }
 
 
-    fun deleteText(textId: Long) {
-        database.deleteText(textId)
+    suspend fun deleteText(textId: Long) {
+        localDataSource.deleteText(textId)
     }
 
-    fun getTexts(): List<TextObjectDataModel> {
-        return database.getTexts().map {
+    suspend fun getTexts(): List<TextObjectDataModel> {
+        return localDataSource.getTexts().map {
             TextObjectDataModel(it.audioText, it.id)
         }
+    }
+
+    suspend fun getResponse(apiKey: String, imageEndpoint: String, contentType: String) : Image {
+        return remoteDataSource.getResponse(apiKey, imageEndpoint, contentType)
+    }
+
+    fun changeUrl(url : String) {
+        remoteDataSource.changeUrl(url)
     }
 }
