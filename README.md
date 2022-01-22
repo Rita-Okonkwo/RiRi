@@ -15,6 +15,8 @@
 ---
 ### App Interface - Onboarding screen
 
+- [View design on Figma](https://www.figma.com/community/file/1066654290306044407/Riri-App)
+
 <img src=https://github.com/Rita-Okonkwo/RiRi/blob/master/screenshots/Screenshot%201.png alt="RiRi" width=250 height=500/> 
 
 ---
