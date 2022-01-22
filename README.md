@@ -8,7 +8,7 @@
 
 ### Download Link
 
-#### Android - [Download the latest app on playstore]()
+#### Android - [Download the app on playstore]()
 
 #### iOS - Pending release
 
@@ -49,7 +49,7 @@
 - Create a new PR (Pull Request) in GitHub.
 
 ---
-### Love this work? Show your love :heart: by putting a :star: on this project :v:></a>
+### Love this work? Show your love :heart: by putting a :star: on this project :v:
 
 ### License
 ```
