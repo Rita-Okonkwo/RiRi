@@ -8,7 +8,7 @@
 
 ### Download Link
 
-#### Android - [Download the app on playstore]()
+#### Android - [Download the app on playstore](https://bit.ly/3tTtR2H)
 
 #### iOS - Pending release
 
