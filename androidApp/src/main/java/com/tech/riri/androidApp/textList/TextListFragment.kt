@@ -33,11 +33,10 @@ import java.util.*
 class TextListFragment : Fragment() {
 
     private val viewModel by viewModels<TextListViewModel> {
-        TextListViewModelFactory( TextObjectRepository(
-            TextObjectRemoteDataSource(), TextObjectLocalDataSource(
+        TextListViewModelFactory( TextObjectRepository(Dispatchers.IO, TextObjectRemoteDataSource(), TextObjectLocalDataSource(
             TextObjectDatabaseDriverFactory(requireActivity().applicationContext)
         )
-        ), Dispatchers.IO)
+        ))
     }
     private  var textList: ArrayList<TextObjectDataModel> = arrayListOf()
     private lateinit var adapter: TextListAdapter
@@ -50,7 +49,6 @@ class TextListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-    //    ((AppCompatActivity)getActivity()).getSupportActionBar().hide()
         _binding = TextListFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -169,7 +167,6 @@ class TextListFragment : Fragment() {
 
     private fun getTextList() {
         viewModel.getTextList()
-        adapter.submitList(textList)
     }
 
 }

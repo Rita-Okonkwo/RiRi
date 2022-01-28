@@ -28,7 +28,7 @@ class ResultFragment : Fragment() {
     private var _binding: FragmentResultBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<UploadImageViewModel> {
-        UploadImageViewModelFactory( TextObjectRepository(
+        UploadImageViewModelFactory( TextObjectRepository(Dispatchers.IO,
             TextObjectRemoteDataSource(), TextObjectLocalDataSource(
             TextObjectDatabaseDriverFactory(requireActivity().applicationContext)
         )

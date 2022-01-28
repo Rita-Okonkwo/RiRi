@@ -5,27 +5,38 @@ import com.tech.riri.shared.data.local.TextObjectLocalDataSource
 import com.tech.riri.shared.data.models.TextObjectDataModel
 import com.tech.riri.shared.data.remote.TextObjectRemoteDataSource
 import com.tech.riri.shared.entity.Image
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
-class TextObjectRepository(private val remoteDataSource: TextObjectInterface, private val localDataSource: TextObjectInterface) {
+class TextObjectRepository(private val dispatcher: CoroutineDispatcher, private val remoteDataSource: TextObjectInterface, private val localDataSource: TextObjectInterface) {
 
     suspend fun addText(text: String) {
-        localDataSource.addText(text)
+        withContext(dispatcher) {
+            localDataSource.addText(text)
+        }
     }
 
 
     suspend fun deleteText(textId: Long) {
-        localDataSource.deleteText(textId)
+        withContext(dispatcher) {
+            localDataSource.deleteText(textId)
+        }
     }
 
     suspend fun getTexts(): List<TextObjectDataModel> {
-        return localDataSource.getTexts().map {
-            TextObjectDataModel(it.audioText, it.id)
+        return withContext(dispatcher) {
+            localDataSource.getTexts().map {
+                TextObjectDataModel(it.audioText, it.id)
+            }
         }
     }
 
     suspend fun getResponse(apiKey: String, imageEndpoint: String, contentType: String) : Image {
-        return remoteDataSource.getResponse(apiKey, imageEndpoint, contentType)
+        return withContext(dispatcher) {
+            remoteDataSource.getResponse(apiKey, imageEndpoint, contentType)
+        }
     }
 
     fun changeUrl(url : String) {

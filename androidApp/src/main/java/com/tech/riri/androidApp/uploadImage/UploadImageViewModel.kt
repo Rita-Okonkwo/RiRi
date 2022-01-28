@@ -49,7 +49,7 @@ class UploadImageViewModel(private val textObjectRepository: TextObjectRepositor
 
 
     fun retrieveImageResponse() {
-        viewModelScope.launch(coroutineDispatcher) {
+        viewModelScope.launch {
             kotlin.runCatching {
                 _status.postValue("loading")
                 textObjectRepository.getResponse(BuildConfig.API_KEY, BuildConfig.IMAGE_ENDPOINT, BuildConfig.CONTENT_TYPE)
@@ -98,8 +98,8 @@ class UploadImageViewModel(private val textObjectRepository: TextObjectRepositor
   }
 
     private suspend fun decodeBmp(url: URL) =
-        withContext(Dispatchers.IO) {
-            return@withContext try {
+        withContext(coroutineDispatcher) {
+            try {
                 BitmapFactory.decodeStream(url.openConnection().getInputStream())
             } catch (e : IOException) {
                 Log.d("bmp", e.toString())
@@ -193,7 +193,7 @@ class UploadImageViewModel(private val textObjectRepository: TextObjectRepositor
     }
 
     fun saveText(audioText: String) {
-        viewModelScope.launch(coroutineDispatcher) {
+        viewModelScope.launch {
             if (audioText.isNotEmpty()) {
                 textObjectRepository.addText(audioText)
             }

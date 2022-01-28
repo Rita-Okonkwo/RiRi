@@ -12,20 +12,20 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TextListViewModel(private val textObjectRepository: TextObjectRepository, private val defaultDispatcher: CoroutineDispatcher = Dispatchers.IO) : ViewModel() {
+class TextListViewModel(private val textObjectRepository: TextObjectRepository) : ViewModel() {
 
     private val _list = MutableLiveData<List<TextObjectDataModel>>()
     val list: LiveData<List<TextObjectDataModel>>
         get() = _list
 
     fun getTextList() {
-        viewModelScope.launch(defaultDispatcher) {
+        viewModelScope.launch {
             _list.postValue(textObjectRepository.getTexts())
         }
     }
 
     fun deleteText(textObjectDataModel: TextObjectDataModel) {
-        viewModelScope.launch(defaultDispatcher) {
+        viewModelScope.launch {
             textObjectRepository.deleteText(textObjectDataModel.id)
         }
     }
@@ -33,8 +33,7 @@ class TextListViewModel(private val textObjectRepository: TextObjectRepository, 
 
 @Suppress("UNCHECKED_CAST")
 class TextListViewModelFactory (
-    private val textObjectRepository: TextObjectRepository,
-    private val coroutineDispatcher: CoroutineDispatcher) : ViewModelProvider.NewInstanceFactory() {
+    private val textObjectRepository: TextObjectRepository) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>) =
-        (TextListViewModel(textObjectRepository, coroutineDispatcher) as T)
+        (TextListViewModel(textObjectRepository) as T)
 }

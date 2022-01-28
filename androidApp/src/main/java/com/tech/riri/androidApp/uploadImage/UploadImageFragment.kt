@@ -33,7 +33,7 @@ class UploadImageFragment : Fragment() {
     private val PICK_IMAGE = 50
     private var filePath: Uri? = null
     private val viewModel by viewModels<UploadImageViewModel> {
-        UploadImageViewModelFactory( TextObjectRepository(TextObjectRemoteDataSource(), TextObjectLocalDataSource(
+        UploadImageViewModelFactory( TextObjectRepository(Dispatchers.IO, TextObjectRemoteDataSource(), TextObjectLocalDataSource(
             TextObjectDatabaseDriverFactory(requireActivity().applicationContext)
         )), Dispatchers.IO)
     }
