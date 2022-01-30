@@ -2,7 +2,6 @@ package com.tech.riri.androidApp.uploadImage
 
 import android.os.Build
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.tech.riri.androidApp.MainCoroutineRule
@@ -12,7 +11,6 @@ import com.tech.riri.shared.data.TextObjectRepository
 import com.tech.riri.shared.data.local.TextObjectLocalDataSource
 import com.tech.riri.shared.data.remote.TextObjectRemoteDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
@@ -35,7 +33,7 @@ class UploadImageViewModelTest {
 
     @Before
     fun setupViewModel() {
-        TextObjectRepository(
+        TextObjectRepository(mainCoroutineRule.dispatcher,
             TextObjectRemoteDataSource(), TextObjectLocalDataSource(
             TextObjectDatabaseDriverFactory(ApplicationProvider.getApplicationContext())
         )
