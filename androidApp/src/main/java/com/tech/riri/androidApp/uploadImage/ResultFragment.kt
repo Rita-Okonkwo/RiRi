@@ -117,6 +117,7 @@ class ResultFragment : Fragment() {
     override fun onDestroyView() {
         tts.stop()
         tts.shutdown()
+        _binding = null
         super.onDestroyView()
     }
 }
