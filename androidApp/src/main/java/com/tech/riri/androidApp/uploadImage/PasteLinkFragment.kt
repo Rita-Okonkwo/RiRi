@@ -144,4 +144,9 @@ class PasteLinkFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 }
