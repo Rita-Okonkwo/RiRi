@@ -7,19 +7,17 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.tech.riri.androidApp.BuildConfig
 import com.tech.riri.shared.cache.TextObjectDatabaseDriverFactory
 import com.tech.riri.shared.data.TextObjectRepository
-import com.tech.riri.shared.data.local.TextSqlDelightDatabase
-import com.tech.riri.shared.data.remote.RiRiApi
+import com.tech.riri.shared.data.local.TextObjectLocalDataSource
+import com.tech.riri.shared.data.remote.TextObjectRemoteDataSource
 import com.tech.riri.shared.entity.Image
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import com.tech.riri.shared.data.TextObjectRepositoryInterface
 import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileNotFoundException
@@ -27,19 +25,10 @@ import java.io.IOException
 import java.net.URL
 import java.util.*
 
-class UploadImageViewModel(application: Application) : AndroidViewModel(application) {
+class UploadImageViewModel(private val textObjectRepository: TextObjectRepositoryInterface, private val coroutineDispatcher: CoroutineDispatcher) : ViewModel() {
 
     var currentPhotoPath = MutableLiveData<String?>()
 
-    private val storage = Firebase.storage
-
-    private val storageReference = storage.reference
-
-    private val api = RiRiApi()
-
-
-    private val textObjectRepository =
-        TextObjectRepository(TextSqlDelightDatabase(TextObjectDatabaseDriverFactory(application.applicationContext)))
 
     var image = MutableLiveData<Bitmap>()
 
@@ -47,8 +36,8 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
     val status: LiveData<String>
         get() = _status
 
-    private val _imageStatus = MutableLiveData<String>()
-    val imageStatus: LiveData<String>
+    private val _imageStatus = MutableLiveData<String?>()
+    val imageStatus: LiveData<String?>
         get() = _imageStatus
 
     private val _text = MutableLiveData<String?>()
@@ -63,27 +52,27 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
     fun retrieveImageResponse() {
         viewModelScope.launch {
             kotlin.runCatching {
-                _status.value = "loading"
-                api.getResponse(BuildConfig.API_KEY, BuildConfig.IMAGE_ENDPOINT, BuildConfig.CONTENT_TYPE)
+                _status.postValue("loading")
+                textObjectRepository.getResponse(BuildConfig.API_KEY, BuildConfig.IMAGE_ENDPOINT, BuildConfig.CONTENT_TYPE)
             }.onSuccess {
                 Log.d("test", it.toString())
                 if (it.status == "succeeded") {
-                    _status.value = "done"
+                    _status.postValue("done")
                     if (it.analyzeResult != null && it.analyzeResult?.readResults?.get(0)?.lines?.isEmpty()!!) {
-                        _text.value = "No text found in image"
+                        _text.postValue("No text found in image")
                     } else {
-                        _text.value = extractText(it)
+                        _text.postValue(extractText(it))
                         tempImageRef?.delete()
                     }
                     println(_text.value)
 
                 } else {
-                    _status.value = "loading"
+                    _status.postValue("loading")
                     delay(2000)
                     retrieveImageResponse()
                 }
             }.onFailure {
-                _status.value = "fn"
+                _status.postValue("fn")
                 println(it.message)
                 Log.d("azure", it.message.toString())
             }
@@ -92,22 +81,26 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun uploadImgUrl(url: String) {
+        if (url.isEmpty()) {
+            _imageStatus.value = null
+            return
+        }
         viewModelScope.launch {
             uploadImageUrl(url)
         }
     }
 
-    suspend fun uploadImageUrl(url: String) {
+    private suspend fun uploadImageUrl(url: String) {
         val imageUrl = URL(url)
         val bmp = decodeBmp(imageUrl)
         println("url:" + bmp?.byteCount)
-        api.imageUrl = url
+        textObjectRepository.changeUrl(url)
         _imageStatus.value = "succeeded"
-    }
+  }
 
-    suspend fun decodeBmp(url: URL) =
-        withContext(Dispatchers.IO) {
-            return@withContext try {
+    private suspend fun decodeBmp(url: URL) =
+        withContext(coroutineDispatcher) {
+            try {
                 BitmapFactory.decodeStream(url.openConnection().getInputStream())
             } catch (e : IOException) {
                 Log.d("bmp", e.toString())
@@ -116,6 +109,9 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
         }
 
     fun uploadImage(filePath: Uri?) {
+        val storage = Firebase.storage
+
+        val storageReference = storage.reference
         if (filePath != null) {
             val ref = storageReference.child("uploads/" + UUID.randomUUID().toString())
             tempImageRef = ref
@@ -131,9 +127,8 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
             }.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val downloadUri = task.result
-                    api.imageUrl = downloadUri.toString()
+                    textObjectRepository.changeUrl(downloadUri.toString())
                     _imageStatus.value = "succeeded"
-                    println(api.imageUrl)
                 } else {
                     // Handle failures
                     _imageStatus.value = "failed"
@@ -199,9 +194,19 @@ class UploadImageViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun saveText(audioText: String) {
-        if (audioText.isNotEmpty()) {
-            textObjectRepository.addText(audioText)
+        viewModelScope.launch {
+            if (audioText.isNotEmpty()) {
+                textObjectRepository.addText(audioText)
+            }
         }
     }
 
+}
+
+@Suppress("UNCHECKED_CAST")
+class UploadImageViewModelFactory (
+    private val textObjectRepository: TextObjectRepository,
+private val coroutineDispatcher: CoroutineDispatcher) : ViewModelProvider.NewInstanceFactory() {
+    override fun <T : ViewModel> create(modelClass: Class<T>) =
+        (UploadImageViewModel(textObjectRepository, coroutineDispatcher) as T)
 }

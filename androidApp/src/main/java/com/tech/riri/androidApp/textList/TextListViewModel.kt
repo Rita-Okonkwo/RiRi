@@ -1,21 +1,40 @@
 package com.tech.riri.androidApp.textList
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.*
+import com.tech.riri.androidApp.uploadImage.UploadImageViewModel
 import com.tech.riri.shared.cache.TextObjectDatabaseDriverFactory
 import com.tech.riri.shared.data.TextObjectRepository
-import com.tech.riri.shared.data.local.TextSqlDelightDatabase
+import com.tech.riri.shared.data.TextObjectRepositoryInterface
+import com.tech.riri.shared.data.local.TextObjectLocalDataSource
 import com.tech.riri.shared.data.models.TextObjectDataModel
+import com.tech.riri.shared.data.remote.TextObjectRemoteDataSource
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class TextListViewModel(application: Application) : AndroidViewModel(application) {
-    private val textObjectRepository =
-        TextObjectRepository(TextSqlDelightDatabase(TextObjectDatabaseDriverFactory(application.applicationContext)))
+class TextListViewModel(private val textObjectRepository: TextObjectRepositoryInterface) : ViewModel() {
 
-    fun getTextList(): List<TextObjectDataModel> {
-        return textObjectRepository.getTexts()
+    private val _list = MutableLiveData<List<TextObjectDataModel>>()
+    val list: LiveData<List<TextObjectDataModel>>
+        get() = _list
+
+    fun getTextList() {
+        viewModelScope.launch {
+            _list.postValue(textObjectRepository.getTexts())
+        }
     }
 
     fun deleteText(textObjectDataModel: TextObjectDataModel) {
-        textObjectRepository.deleteText(textObjectDataModel.id)
+        viewModelScope.launch {
+            textObjectRepository.deleteText(textObjectDataModel.id)
+        }
     }
+}
+
+@Suppress("UNCHECKED_CAST")
+class TextListViewModelFactory (
+    private val textObjectRepository: TextObjectRepository) : ViewModelProvider.NewInstanceFactory() {
+    override fun <T : ViewModel> create(modelClass: Class<T>) =
+        (TextListViewModel(textObjectRepository) as T)
 }

@@ -15,17 +15,30 @@ import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.tech.riri.androidApp.R
 import com.tech.riri.androidApp.databinding.TextListFragmentBinding
+import com.tech.riri.androidApp.uploadImage.UploadImageViewModel
+import com.tech.riri.androidApp.uploadImage.UploadImageViewModelFactory
+import com.tech.riri.shared.cache.TextObjectDatabaseDriverFactory
+import com.tech.riri.shared.data.TextObjectRepository
+import com.tech.riri.shared.data.local.TextObjectLocalDataSource
 import com.tech.riri.shared.data.models.TextObjectDataModel
+import com.tech.riri.shared.data.remote.TextObjectRemoteDataSource
+import kotlinx.coroutines.Dispatchers
 import java.util.*
 
 
 class TextListFragment : Fragment() {
 
-    private lateinit var viewModel: TextListViewModel
-    private lateinit var textList: ArrayList<TextObjectDataModel>
+    private val viewModel by viewModels<TextListViewModel> {
+        TextListViewModelFactory( TextObjectRepository(Dispatchers.IO, TextObjectRemoteDataSource(), TextObjectLocalDataSource(
+            TextObjectDatabaseDriverFactory(requireActivity().applicationContext)
+        )
+        ))
+    }
+    private  var textList: ArrayList<TextObjectDataModel> = arrayListOf()
     private lateinit var adapter: TextListAdapter
     private lateinit var tts: TextToSpeech
     private lateinit var playandstop: ImageView
@@ -36,20 +49,27 @@ class TextListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-    //    ((AppCompatActivity)getActivity()).getSupportActionBar().hide()
         _binding = TextListFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view : View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-            .create(TextListViewModel::class.java)
         adapter = TextListAdapter { text, textView ->
             textListOnClick(text, textView)
         }
         binding.listRV.adapter = adapter
+
         getTextList()
+        viewModel.list.observe(viewLifecycleOwner, { list ->
+            textList = list as ArrayList<TextObjectDataModel>
+            if (list.isNotEmpty()) {
+                binding.noSavedTexts.visibility = View.GONE
+            } else {
+                binding.noSavedTexts.visibility = View.VISIBLE
+            }
+            adapter.submitList(textList)
+        })
 
         tts = TextToSpeech(context, TextToSpeech.OnInitListener { status ->
             if (status == TextToSpeech.SUCCESS) {
@@ -146,11 +166,7 @@ class TextListFragment : Fragment() {
     }
 
     private fun getTextList() {
-        textList = viewModel.getTextList() as ArrayList<TextObjectDataModel>
-        if (textList.isNotEmpty()) {
-            binding.noSavedTexts.visibility = View.GONE
-        }
-        adapter.submitList(textList)
+        viewModel.getTextList()
     }
 
 }
