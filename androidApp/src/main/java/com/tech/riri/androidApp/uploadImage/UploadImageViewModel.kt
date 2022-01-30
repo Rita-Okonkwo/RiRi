@@ -17,6 +17,7 @@ import com.tech.riri.shared.entity.Image
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import com.tech.riri.shared.data.TextObjectRepositoryInterface
 import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileNotFoundException
@@ -24,7 +25,7 @@ import java.io.IOException
 import java.net.URL
 import java.util.*
 
-class UploadImageViewModel(private val textObjectRepository: TextObjectRepository, private val coroutineDispatcher: CoroutineDispatcher) : ViewModel() {
+class UploadImageViewModel(private val textObjectRepository: TextObjectRepositoryInterface, private val coroutineDispatcher: CoroutineDispatcher) : ViewModel() {
 
     var currentPhotoPath = MutableLiveData<String?>()
 

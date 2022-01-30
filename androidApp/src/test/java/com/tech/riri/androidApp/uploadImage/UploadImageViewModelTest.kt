@@ -2,14 +2,12 @@ package com.tech.riri.androidApp.uploadImage
 
 import android.os.Build
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.tech.riri.androidApp.MainCoroutineRule
+import com.tech.riri.androidApp.data.FakeRepository
 import com.tech.riri.androidApp.getOrAwaitValue
-import com.tech.riri.shared.cache.TextObjectDatabaseDriverFactory
-import com.tech.riri.shared.data.TextObjectRepository
-import com.tech.riri.shared.data.local.TextObjectLocalDataSource
-import com.tech.riri.shared.data.remote.TextObjectRemoteDataSource
+import com.tech.riri.shared.data.TextObjectRepositoryInterface
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.*
@@ -26,19 +24,16 @@ import org.robolectric.annotation.Config
 class UploadImageViewModelTest {
 
     private lateinit var uploadImageViewModel: UploadImageViewModel
-    private lateinit var textObjectRepository: TextObjectRepository
+    private lateinit var textObjectRepository: TextObjectRepositoryInterface
 
+    @ExperimentalCoroutinesApi
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
     @Before
     fun setupViewModel() {
-        TextObjectRepository(mainCoroutineRule.dispatcher,
-            TextObjectRemoteDataSource(), TextObjectLocalDataSource(
-            TextObjectDatabaseDriverFactory(ApplicationProvider.getApplicationContext())
-        )
-        )
-        uploadImageViewModel = UploadImageViewModel(textObjectRepository, mainCoroutineRule.dispatcher)
+        textObjectRepository = FakeRepository()
+        uploadImageViewModel = UploadImageViewModel(textObjectRepository, Dispatchers.Main)
     }
 
     @get:Rule

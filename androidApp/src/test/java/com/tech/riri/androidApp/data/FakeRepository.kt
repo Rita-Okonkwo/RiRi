@@ -1,13 +1,13 @@
 package com.tech.riri.androidApp.data
 
-import com.tech.riri.shared.data.local.TextObjectInterface
+import com.tech.riri.shared.data.TextObjectRepositoryInterface
 import com.tech.riri.shared.data.models.TextObjectDataModel
 import com.tech.riri.shared.entity.AnalyzeResult
 import com.tech.riri.shared.entity.Image
 
-class FakeDataSource(var database: MutableMap<Long, String> = mutableMapOf()) :
-    TextObjectInterface {
-    var count = 1L
+class FakeRepository : TextObjectRepositoryInterface {
+    var database: MutableMap<Long, String> = mutableMapOf()
+    private var count = 1L
     override suspend fun addText(text: String) {
         if (text.isEmpty()) {
             return
@@ -16,8 +16,8 @@ class FakeDataSource(var database: MutableMap<Long, String> = mutableMapOf()) :
         count += 1
     }
 
-    override suspend fun deleteText(id: Long) {
-        database.remove(id)
+    override suspend fun deleteText(textId: Long) {
+        database.remove(textId)
     }
 
     override suspend fun getTexts(): List<TextObjectDataModel> {

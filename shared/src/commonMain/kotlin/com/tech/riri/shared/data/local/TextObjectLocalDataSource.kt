@@ -2,14 +2,14 @@ package com.tech.riri.shared.data.local
 
 import com.tech.riri.shared.cache.TextObjectDatabaseDriverFactory
 import com.tech.riri.shared.cache.TextObjectSqlDelightDatabase
-import com.tech.riri.shared.data.models.TextObjectDatabaseModel
+import com.tech.riri.shared.data.models.TextObjectDataModel
 import com.tech.riri.shared.entity.Image
 
 class TextObjectLocalDataSource(textObjectDatabaseDriverFactory: TextObjectDatabaseDriverFactory) :
     TextObjectInterface {
-    val database =
+    private val database =
         TextObjectSqlDelightDatabase.invoke(textObjectDatabaseDriverFactory.createDriver())
-    val textObjectQueries = database.textObjectSqlDelightDatabaseQueries
+    private val textObjectQueries = database.textObjectSqlDelightDatabaseQueries
     override suspend fun addText(text: String) {
         textObjectQueries.insertText(text)
     }
@@ -18,9 +18,9 @@ class TextObjectLocalDataSource(textObjectDatabaseDriverFactory: TextObjectDatab
         textObjectQueries.deleteText(id)
     }
 
-    override suspend fun getTexts(): List<TextObjectDatabaseModel> {
+    override suspend fun getTexts(): List<TextObjectDataModel> {
         return textObjectQueries.getText().executeAsList().map {
-            TextObjectDatabaseModel(it.text, it.id)
+            TextObjectDataModel(it.text, it.id)
         }
     }
 

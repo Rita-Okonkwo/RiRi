@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.tech.riri.androidApp.uploadImage.UploadImageViewModel
 import com.tech.riri.shared.cache.TextObjectDatabaseDriverFactory
 import com.tech.riri.shared.data.TextObjectRepository
+import com.tech.riri.shared.data.TextObjectRepositoryInterface
 import com.tech.riri.shared.data.local.TextObjectLocalDataSource
 import com.tech.riri.shared.data.models.TextObjectDataModel
 import com.tech.riri.shared.data.remote.TextObjectRemoteDataSource
@@ -12,7 +13,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TextListViewModel(private val textObjectRepository: TextObjectRepository) : ViewModel() {
+class TextListViewModel(private val textObjectRepository: TextObjectRepositoryInterface) : ViewModel() {
 
     private val _list = MutableLiveData<List<TextObjectDataModel>>()
     val list: LiveData<List<TextObjectDataModel>>

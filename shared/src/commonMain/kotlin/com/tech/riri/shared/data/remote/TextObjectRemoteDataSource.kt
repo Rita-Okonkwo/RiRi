@@ -1,7 +1,7 @@
 package com.tech.riri.shared.data.remote
 
 import com.tech.riri.shared.data.local.TextObjectInterface
-import com.tech.riri.shared.data.models.TextObjectDatabaseModel
+import com.tech.riri.shared.data.models.TextObjectDataModel
 import com.tech.riri.shared.entity.Image
 import com.tech.riri.shared.entity.Url
 import io.ktor.client.HttpClient
@@ -40,7 +40,7 @@ class TextObjectRemoteDataSource : TextObjectInterface {
         //not required
     }
 
-    override suspend fun getTexts(): List<TextObjectDatabaseModel> {
+    override suspend fun getTexts(): List<TextObjectDataModel> {
         //not required
         return emptyList()
     }
