@@ -113,4 +113,10 @@ class ResultFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    override fun onDestroyView() {
+        tts.stop()
+        tts.shutdown()
+        super.onDestroyView()
+    }
 }

@@ -169,4 +169,10 @@ class TextListFragment : Fragment() {
         viewModel.getTextList()
     }
 
+    override fun onDestroyView() {
+        tts.stop()
+        tts.shutdown()
+        super.onDestroyView()
+    }
+
 }
