@@ -6,7 +6,9 @@
 
 <img src=https://github.com/Rita-Okonkwo/RiRi/blob/master/screenshots/App%20Icon.png alt="RiRi Logo" width=180 height=180/>
 
+---
 ### Download Link
+---
 
 #### Android - [Download the app on playstore](https://bit.ly/3tTtR2H)
 
