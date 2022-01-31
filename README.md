@@ -42,7 +42,8 @@
 - Build and run the app
 
 ---
-### How to Contribute
+### Contributing
+First off, thank you for considering contributing to the RiRi App. You are a hero! It's people like you that would make information more accesible.
 - Fork the project & clone locally.
 - Create an upstream remote and sync your local copy before you branch.
 - Branch for each separate piece of work.
