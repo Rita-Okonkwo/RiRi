@@ -2,7 +2,7 @@
 
 # RiRi
 
-"RiRi" means "to see" in the Nigerian Yoruba language. It is a cross-platform optical character recognition mobile application. It aims to make information more accessible to people with visual impairments.
+"RiRi" means "to see" in the Nigerian Yoruba language. It is a cross-platform optical character recognition mobile application. It aims to make information more accessible to people with visual impairments and transcribes image text to audio.
 
 <img src=https://github.com/Rita-Okonkwo/RiRi/blob/master/screenshots/App%20Icon.png alt="RiRi Logo" width=180 height=180/>
 
@@ -10,6 +10,7 @@
 ### Download Link
 
 #### Android - [Download the app on playstore](https://bit.ly/3tTtR2H)
+### Andriod app preview [Screen recording](https://drive.google.com/file/d/1BXNB02S7klXm1oH7uU6iiFfCIHlTcYa-/view?usp=sharing)
 
 #### iOS - Pending release
 
